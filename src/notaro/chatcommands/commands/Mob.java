@@ -1,7 +1,6 @@
 package notaro.chatcommands.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,160 +18,98 @@ public class Mob implements CommandExecutor{
 		Player player = (Player) sender;
 		if((cmd.getName().equalsIgnoreCase("sm")) && (args.length == 1)){
 			if(player.hasPermission("notaro.sm") || player.hasPermission("notaro.*")){
-				org.bukkit.World world = player.getWorld();
-				int x = player.getEyeLocation().getBlockX();
-				int y = player.getEyeLocation().getBlockY();
-				int z = player.getEyeLocation().getBlockZ();
-				Location eye = new Location(world, x, y, z);
 				String mob = String.valueOf(args[0]);
 				if(mob.equalsIgnoreCase("cow")){
-					player.getWorld().spawnCreature(eye, EntityType.COW);
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("COW"));
+				}else if(mob.equalsIgnoreCase("chicken")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("CHICKEN"));
+					return true;
+				}else if(mob.equalsIgnoreCase("wolf")){					
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("WOLF"));
+					return true;
+				}else if(mob.equalsIgnoreCase("sheep")){				
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SHEEP"));
+					return true;
+				}else if(mob.equalsIgnoreCase("pig")){	
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("PIG"));
+					return true;
+				}else if(mob.equalsIgnoreCase("snowman")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SNOWMAN"));
+					return true;
+				}else if(mob.equalsIgnoreCase("squid")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SQUID"));
+					return true;
+				}else if(mob.equalsIgnoreCase("creeper")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("CREEPER"));
+					return true;
+				}else if(mob.equalsIgnoreCase("spider")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SPIDER"));
+					return true;
+				}else if(mob.equalsIgnoreCase("cavespider")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("CAVE_SPIDER"));
+					return true;
+				}else if(mob.equalsIgnoreCase("ghast")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("GHAST"));
+					return true;
+				}else if(mob.equalsIgnoreCase("enderman")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ENDERMAN"));
+					return true;
+				}else if(mob.equalsIgnoreCase("enderdragon")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ENDER_DRAGON"));
+					return true;
+				}else if(mob.equalsIgnoreCase("blaze")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("BLAZE"));
+					return true;
+				}else if(mob.equalsIgnoreCase("magmacube")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("MAGMA_CUBE"));
+					return true;
+				}else if(mob.equalsIgnoreCase("mooshroom")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("MUSHROOM_COW"));
+					return true;
+				}else if(mob.equalsIgnoreCase("pigzombie")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("PIG_ZOMBIE"));
+					return true;
+				}else if(mob.equalsIgnoreCase("silverfish")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SILVERFISH"));
+					return true;
+				}else if(mob.equalsIgnoreCase("skeleton")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SKELETON"));
+					return true;
+				}else if(mob.equalsIgnoreCase("slime")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SLIME"));
+				}else if(mob.equalsIgnoreCase("zombie")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ZOMBIE"));
+					return true;
+				}else if(mob.equalsIgnoreCase("crystal")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ENDER_CRYSTAL"));
+					return true;
+				}else if(mob.equalsIgnoreCase("giant")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("GIANT"));
+					return true;
+				}else if(mob.equalsIgnoreCase("bat")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("BAT"));
+					return true;
+				}else if(mob.equalsIgnoreCase("witch")){	
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("WITCH"));
+					return true;
+				}else if(mob.equalsIgnoreCase("wither")){	
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("WITHER"));
+					return true;
+				}else if(mob.equalsIgnoreCase("ocelot")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("OCELOT"));
+					return true;
+				}else if(mob.equalsIgnoreCase("golem")){
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("IRON_GOLEM"));
+					return true;
 				}else{
-					if(mob.equalsIgnoreCase("chicken")){
-						player.getWorld().spawnCreature(eye, EntityType.CHICKEN);
-						return true;
-					}else{
-						if(mob.equalsIgnoreCase("wolf")){
-							player.getWorld().spawnCreature(eye, EntityType.WOLF);
-							return true;
-						}else{
-							if(mob.equalsIgnoreCase("sheep")){
-								player.getWorld().spawnCreature(eye, EntityType.SHEEP);
-								return true;
-							}else{
-								if(mob.equalsIgnoreCase("pig")){
-									player.getWorld().spawnCreature(eye, EntityType.PIG);
-									return true;
-								}else{
-									if(mob.equalsIgnoreCase("snowman")){
-										player.getWorld().spawnCreature(eye, EntityType.SNOWMAN);
-										return true;
-									}else{
-										if(mob.equalsIgnoreCase("squid")){
-											player.getWorld().spawnCreature(eye, EntityType.SQUID);
-											return true;
-										}else{
-											if(mob.equalsIgnoreCase("creeper")){
-												player.getWorld().spawnCreature(eye, EntityType.CREEPER);
-												return true;
-											}else{
-												if(mob.equalsIgnoreCase("spider")){
-													player.getWorld().spawnCreature(eye, EntityType.SPIDER);
-													return true;
-												}else{
-													if(mob.equalsIgnoreCase("cavespider")){
-														player.getWorld().spawnCreature(eye, EntityType.CAVE_SPIDER);
-														return true;
-													}else{
-														if(mob.equalsIgnoreCase("ghast")){
-															player.getWorld().spawnCreature(eye, EntityType.GHAST);
-															return true;
-														}else{
-															if(mob.equalsIgnoreCase("enderman")){
-																player.getWorld().spawnCreature(eye, EntityType.ENDERMAN);
-																return true;
-															}else{
-																if(mob.equalsIgnoreCase("enderdragon")){
-																	player.getWorld().spawnCreature(eye, EntityType.ENDER_DRAGON);
-																	return true;
-																}else{
-																	if(mob.equalsIgnoreCase("blaze")){
-																		player.getWorld().spawnCreature(eye, EntityType.BLAZE);
-																		return true;
-																	}else{
-																		if(mob.equalsIgnoreCase("magmacube")){
-																			player.getWorld().spawnCreature(eye, EntityType.MAGMA_CUBE);
-																			return true;
-																		}else{
-																			if(mob.equalsIgnoreCase("mooshroom")){
-																				player.getWorld().spawnCreature(eye, EntityType.MUSHROOM_COW);
-																				return true;
-																			}else{
-																				if(mob.equalsIgnoreCase("pigzombie")){
-																					player.getWorld().spawnCreature(eye, EntityType.PIG_ZOMBIE);
-																					return true;
-																				}else{
-																					if(mob.equalsIgnoreCase("silverfish")){
-																						player.getWorld().spawnCreature(eye, EntityType.SILVERFISH);
-																						return true;
-																					}else{
-																						if(mob.equalsIgnoreCase("skeleton")){
-																							player.getWorld().spawnCreature(eye, EntityType.SKELETON);
-																							return true;
-																						}else{
-																							if(mob.equalsIgnoreCase("slime")){
-																								player.getWorld().spawnCreature(eye, EntityType.SLIME);
-																							}else{
-																								if(mob.equalsIgnoreCase("zombie")){
-																									player.getWorld().spawnCreature(eye, EntityType.ZOMBIE);
-																									return true;
-																								}else{
-																									if(mob.equalsIgnoreCase("crystal")){
-																										player.getWorld().spawnEntity(eye, EntityType.ENDER_CRYSTAL);
-																										return true;
-																									}else{
-																										if(mob.equalsIgnoreCase("giant")){
-																											player.getWorld().spawnEntity(eye, EntityType.GIANT);
-																											return true;
-																										}else{
-																											if(mob.equalsIgnoreCase("bat")){
-																												player.getWorld().spawnCreature(eye, EntityType.BAT);
-																												return true;
-																											}else{
-																												if(mob.equalsIgnoreCase("witch")){
-																													player.getWorld().spawnCreature(eye, EntityType.WITCH);
-																													return true;
-																												}else{
-																													if(mob.equalsIgnoreCase("wither")){
-																														player.getWorld().spawnCreature(eye, EntityType.WITHER);
-																														return true;
-																													}else{
-																														if(mob.equalsIgnoreCase("ocelot")){
-																															player.getWorld().spawnCreature(eye, EntityType.OCELOT);
-																															return true;
-																														}else{
-																															if(mob.equalsIgnoreCase("golem")){
-																																player.getWorld().spawnCreature(eye, EntityType.IRON_GOLEM);
-																																return true;
-
-																															}else{
-																																player.sendMessage(ChatColor.DARK_AQUA + "What mob is that?");
-																																return true;
-																															}
-																														}
-																													}
-																												}
-																											}
-																										}
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
+					player.sendMessage(ChatColor.DARK_AQUA + "What mob is that?");
+					return true;
 				}
-
 			}else{
-				return false;
+				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.sm " + ChatColor.RED + "to perform this command.");
 			}
 		}else{
 			player.sendMessage(ChatColor.DARK_AQUA + "Correct syntax: /sm mobtype ");
-			return true;
 		}
 		return false;
 	}

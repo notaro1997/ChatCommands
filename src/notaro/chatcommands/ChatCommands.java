@@ -34,6 +34,7 @@ public class ChatCommands extends JavaPlugin{
 		this.UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "UpdateChecker.txt"));
 		this.UpdateTrueOrFalse.loadData();
 
+		this.getHomeData().loadData();
 		this.getWarpData().loadData();
 		this.log = new Log(this);
 		this.enabledPlayers = new ArrayList<String>();
@@ -45,6 +46,7 @@ public class ChatCommands extends JavaPlugin{
 
 	public void onDisable(){
 
+		this.getHomeData().saveData();
 		this.getWarpData().saveData();
 		this.HiddenPlayers.saveData();
 		this.TpBlockPlayers.saveData();
@@ -103,12 +105,12 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("setwarp").setExecutor(new SetWarp(this));
 		getCommand("delwarp").setExecutor(new SetWarp(this));
 		getCommand("warp").setExecutor(new Warp(this));
+		getCommand("home").setExecutor(new Home(this));
+		getCommand("sethome").setExecutor(new SetHome(this));
 	}
 
 	private void registerEvents(ChatCommands instance){
-
 		PluginManager manager = this.getServer().getPluginManager();
-
 		manager.registerEvents(new ExplodingArrowsListener(this), this);
 		manager.registerEvents(new ExplodingArrowsFireListener(this), this);
 		manager.registerEvents(new HideListener(this), this);
@@ -127,8 +129,12 @@ public class ChatCommands extends JavaPlugin{
 			}
 		}
 	}
-	
+
 	public WarpFile getWarpData(){
 		return new WarpFile(this);
+	}
+
+	public HomeFile getHomeData(){
+		return new HomeFile(this);
 	}
 }

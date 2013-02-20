@@ -1,11 +1,15 @@
 v9.2
++ Added /home command. Teleport to your home.
++ Added /sethome command! set your home where your standing.
 + Added warp command! warp to a specified warp.
 + Added setwarp command! Create a warp!
 + Added delwarp commands! delete a specified warp!
 + Added kickall command! kick everyone except you!
 + Added kill command! kill a specified player!
-* New file will be created to store warp data.
 + Added message on login when there is an update available.
+* Now when using /sm mobs will spawn where you are pointing.
+* Changed Mob code.
+* New file will be created to store warp data.
 * Fixed colors in commands.
 * Fixed errors with certain commands.
 * Added notaro.* permission! Gives you all commands!

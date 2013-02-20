@@ -151,3 +151,9 @@ commands:
     delwarp:
       description: Delete a specified warp.
       -usage: /delwarp
+    home:
+      description: Teleport to your home, or save your home.
+      -usage: /home
+    sethome:
+      description: Set your home where your standing.
+      -usage: /sethome
