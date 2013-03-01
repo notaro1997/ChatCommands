@@ -12,7 +12,7 @@ public class KillAll implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
+		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
 			return true;
 		}
@@ -21,16 +21,16 @@ public class KillAll implements CommandExecutor{
 		if(cmd.getName().equalsIgnoreCase("killall") && sender instanceof Player){
 			if(player.hasPermission("notaro.killall") || player.hasPermission("notaro.*")){
 				int i = 0;
-				for(Entity entity: ((Player)sender).getWorld().getEntities()){
+				for(Entity entity: player.getWorld().getEntities()){
 					if(entity instanceof LivingEntity && !(entity instanceof Player)){
 						LivingEntity entitys = (LivingEntity)entity;
-						if(entitys.getLocation().distance(((Player)sender).getLocation()) > 0){
+						if(entitys.getLocation().distance(player.getLocation()) > 0){
 							entitys.setHealth(0);
 							i++;
 						}
 					}
 				}
-				((Player)sender).sendMessage(ChatColor.DARK_AQUA + "Killed " + ChatColor.RED + i + ChatColor.DARK_AQUA + " entitys in world: " + ChatColor.RED + world);
+				player.sendMessage(ChatColor.DARK_AQUA + "Killed " + ChatColor.RED + i + ChatColor.DARK_AQUA + " entitys in world: " + ChatColor.RED + world);
 			}
 		}
 		return true;

@@ -18,9 +18,14 @@ public class ChatCommands extends JavaPlugin{
 	public HideFile HiddenPlayers;
 	public TpBlockFile TpBlockPlayers;
 	public UpdateCheckerFile UpdateTrueOrFalse;
+	public MuteFile MutedPlayers;
 
 	public void onEnable(){
 
+		(new File(this.getDataFolder().getAbsolutePath())).mkdirs();
+		this.MutedPlayers = new MuteFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "MutedPlayers.txt"));
+		this.MutedPlayers.loadData();
+		
 		(new File(this.getDataFolder().getAbsolutePath())).mkdirs();
 		this.HiddenPlayers = new HideFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "HiddenPlayers.txt"));
 		this.HiddenPlayers.loadData();
@@ -51,17 +56,18 @@ public class ChatCommands extends JavaPlugin{
 		this.HiddenPlayers.saveData();
 		this.TpBlockPlayers.saveData();
 		this.UpdateTrueOrFalse.saveData();
+		this.MutedPlayers.saveData();
 
 	}
 
 	private void RegisterCommands(ChatCommands plugin){
 
-		getCommand("afk").setExecutor(new AFK());
+		getCommand("afk").setExecutor(new Afk());
 		getCommand("bitchslap").setExecutor(new Bitchslap());
 		getCommand("blind").setExecutor(new Blind());
 		getCommand("unblind").setExecutor(new Blind());
 		getCommand("clear").setExecutor(new Clear());
-		getCommand("fakeop").setExecutor(new FakeOP());
+		getCommand("fakeop").setExecutor(new FakeOp());
 		getCommand("hug").setExecutor(new Hug());
 		getCommand("join").setExecutor(new Join());
 		getCommand("leave").setExecutor(new Leave());
@@ -107,6 +113,16 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("warp").setExecutor(new Warp(this));
 		getCommand("home").setExecutor(new Home(this));
 		getCommand("sethome").setExecutor(new SetHome(this));
+		getCommand("mute").setExecutor(new Mute(this));
+		getCommand("unmute").setExecutor(new Mute(this));
+		getCommand("item").setExecutor(new Item(this));
+		getCommand("ping").setExecutor(new Ping());
+		getCommand("exp").setExecutor(new Exp());
+		getCommand("hat").setExecutor(new Hat());
+		getCommand("workbench").setExecutor(new Workbench());
+		getCommand("world").setExecutor(new World());
+		getCommand("give").setExecutor(new Give(this));
+		getCommand("tpto").setExecutor(new Tpto());
 	}
 
 	private void registerEvents(ChatCommands instance){
@@ -115,6 +131,7 @@ public class ChatCommands extends JavaPlugin{
 		manager.registerEvents(new ExplodingArrowsFireListener(this), this);
 		manager.registerEvents(new HideListener(this), this);
 		manager.registerEvents(new UpdateCheckerListener(this), this);
+		manager.registerEvents(new MuteListener(this), this);
 
 	}
 

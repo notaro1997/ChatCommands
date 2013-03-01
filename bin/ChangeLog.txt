@@ -1,3 +1,24 @@
+v9.5
++ Added /tpto command! Tp to coordinates!
+
+v9.4
++ Added /item command! Give yourself any item! And you can specify the amount!
++ Added /give command! Give any player any amount of any item!
++ Added /hat command! Make what your holding your head!
++ Added /mute command! Mute a player from talking!
++ Added /unmute command! Unmutes a player!
++ Added /exp Command!(or /level, or /xp) Give players exp!
++ Added /world command! Teleport between worlds!
++ Added /ping command! Pong!
++ Added /workbench command!(or /bench) open a workbench without having one!
+* A new file will be created called MutedPlayers.txt
+* Fixed errors.
+
+v9.3
+* Fixed new bugs with new commands.
+* Fixed misspellings.
+* Changed some colors with new commands.
+
 v9.2
 + Added /home command. Teleport to your home.
 + Added /sethome command! set your home where your standing.

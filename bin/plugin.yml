@@ -1,8 +1,9 @@
 name: ChatCommands
-version: 9.2
+version: 9.5
 main: notaro.chatcommands.ChatCommands
+website: http://notaro1997.webs.com
 author: notaro1997
-loadbefore: [Essentials, WorldEdit]
+loadbefore: [Essentials, WorldEdit, CommandBook]
 commands:
     leave:
       description: leaves the server.
@@ -157,3 +158,36 @@ commands:
     sethome:
       description: Set your home where your standing.
       -usage: /sethome
+    mute:
+      description: Mutes a specified player.
+      -usage: /mute
+    unmute:
+      description: Unmutes a specified player.
+      -usage: /unmute
+    item:
+      description: Receive a specified item.
+      -usage: /item
+      aliases: [i]
+    ping:
+      description: Pong!
+      -usage: /ping
+    exp:
+      description: Give a specified player a specifed amount of exp.
+      -usage: /exp
+      aliases: [level, xp]
+    hat:
+      description: Make whatever your holding, your head!
+      -usgae: /hat
+    workbench:
+      description: open a workbench.
+      -usage: /workbench
+      aliases: [bench]
+    world:
+      description: Teleport between worlds.
+      -usage: /world
+    give:
+      description: Give any player any amount of any item!
+      -usage: /give
+    tpto:
+      description: Teleport to a set of coords.
+      -usage: /tpto

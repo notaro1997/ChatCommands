@@ -27,7 +27,7 @@ public class HomeFile {
 
 	public void reloadData(){
 		if(HomeFile == null){
-			HomeFile = new File(plugin.getDataFolder(), "HomeFile.yml");
+			HomeFile = new File(plugin.getDataFolder(), "Homes.yml");
 		}
 		Homes = YamlConfiguration.loadConfiguration(HomeFile);
 		InputStream ConfigStream = plugin.getResource("HomeFile.yml");

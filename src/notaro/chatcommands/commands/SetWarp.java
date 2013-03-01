@@ -26,6 +26,7 @@ public class SetWarp implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("setwarp")){
 			WarpFile warps = plugin.getWarpData();
+			String warp = String.valueOf(args[0].toLowerCase());
 			Location location = player.getLocation();
 			int x = location.getBlockX();
 			int y = location.getBlockY();
@@ -35,20 +36,19 @@ public class SetWarp implements CommandExecutor{
 			String world = location.getWorld().getName();
 			if(player.hasPermission("notaro.setwarp") || player.hasPermission("notaro.*")){
 				if(args.length == 1){
-					String Warp = String.valueOf(args[0].toLowerCase());
-					if(warps.getWarps().contains(Warp)){
-						player.sendMessage(ChatColor.RED + "The warp " + ChatColor.YELLOW +  Warp + ChatColor.RED + " already exists.");
+					if(warps.getWarps().contains(warp)){
+						player.sendMessage(ChatColor.RED + "The warp " + ChatColor.YELLOW +  warp + ChatColor.RED + " already exists.");
 						return true;
 					}
-					warps.getWarps().set(Warp + ".world", world);
-					warps.getWarps().set(Warp + ".x", x);
-					warps.getWarps().set(Warp + ".y", y);
-					warps.getWarps().set(Warp + ".z", z);
-					warps.getWarps().set(Warp + ".yaw", yaw);
-					warps.getWarps().set(Warp + ".pitch", pitch);
+					warps.getWarps().set(warp + ".world", world);
+					warps.getWarps().set(warp + ".x", x);
+					warps.getWarps().set(warp + ".y", y);
+					warps.getWarps().set(warp + ".z", z);
+					warps.getWarps().set(warp + ".yaw", yaw);
+					warps.getWarps().set(warp + ".pitch", pitch);
 					warps.saveData();
 					warps.reloadData();
-					player.sendMessage(ChatColor.DARK_AQUA + "The warp " + ChatColor.YELLOW + Warp + ChatColor.DARK_AQUA + " has been created!");
+					player.sendMessage(ChatColor.GREEN + "The warp " + ChatColor.YELLOW + warp + ChatColor.GREEN + " has been created!");
 					return true;
 				}else{
 					player.sendMessage(ChatColor.RED + "Please specify a warp to create.");
@@ -65,10 +65,10 @@ public class SetWarp implements CommandExecutor{
 						warps.getWarps().set(Warp, null);
 						warps.saveData();
 						warps.reloadData();
-						player.sendMessage(ChatColor.DARK_AQUA + "The warp " + ChatColor.YELLOW + Warp + ChatColor.DARK_AQUA + " has been deleted!");
+						player.sendMessage(ChatColor.GREEN + "The warp " + ChatColor.YELLOW + Warp + ChatColor.GREEN + " has been deleted!");
 						return true;
 					}else{
-						player.sendMessage(ChatColor.DARK_AQUA + "The warp " + ChatColor.YELLOW + Warp + ChatColor.DARK_AQUA + " does not exist.");
+						player.sendMessage(ChatColor.RED + "The warp " + ChatColor.YELLOW + Warp + ChatColor.RED + " does not exist.");
 					}
 				}else{
 					player.sendMessage(ChatColor.RED + "Please specify which warp to delete.");

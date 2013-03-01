@@ -27,7 +27,7 @@ public class WarpFile {
 
 	public void reloadData(){
 		if(WarpFile == null){
-			WarpFile = new File(plugin.getDataFolder(), "WarpFile.yml");
+			WarpFile = new File(plugin.getDataFolder(), "Warps.yml");
 		}
 		Warps = YamlConfiguration.loadConfiguration(WarpFile);
 		InputStream ConfigStream = plugin.getResource("WarpFile.yml");

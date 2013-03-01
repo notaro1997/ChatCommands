@@ -81,7 +81,7 @@ public class Mob implements CommandExecutor{
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ZOMBIE"));
 					return true;
 				}else if(mob.equalsIgnoreCase("crystal")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ENDER_CRYSTAL"));
+					player.getWorld().spawnEntity(player.getTargetBlock(null, 600).getLocation(), EntityType.ENDER_CRYSTAL);
 					return true;
 				}else if(mob.equalsIgnoreCase("giant")){
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("GIANT"));

@@ -25,24 +25,24 @@ public class Warp implements CommandExecutor{
 			return true;
 		}
 		Player player = (Player) sender;
-		if(cmd.getName().equalsIgnoreCase("warp")){
-			WarpFile warps = plugin.getWarpData();
+		WarpFile warps = plugin.getWarpData();
+		if(cmd.getName().equalsIgnoreCase("warp") && args.length >= 1){
 			if(player.hasPermission("notaro.warp") || player.hasPermission("notaro.*")){
 				if(args.length == 1){
-					String Warp = String.valueOf(args[0].toLowerCase());
-					if(warps.getWarps().contains(Warp)){
-						String world = warps.getWarps().getString(Warp + ".world");
-						int x = warps.getWarps().getInt(Warp + ".x");
-						int y = warps.getWarps().getInt(Warp + ".y");
-						int z = warps.getWarps().getInt(Warp + ".z");
-						float yaw = warps.getWarps().getInt(Warp + ".yaw");
-						float pitch = warps.getWarps().getInt(Warp + ".pitch");
+					String warp = String.valueOf(args[0].toLowerCase());
+					if(warps.getWarps().contains(warp)){
+						String world = warps.getWarps().getString(warp + ".world");
+						int x = warps.getWarps().getInt(warp + ".x");
+						int y = warps.getWarps().getInt(warp + ".y");
+						int z = warps.getWarps().getInt(warp + ".z");
+						float yaw = warps.getWarps().getInt(warp + ".yaw");
+						float pitch = warps.getWarps().getInt(warp + ".pitch");
 						Location location = new Location(Bukkit.getWorld(world), x + 0.5, y, z + 0.5, yaw, pitch);
-						player.sendMessage(ChatColor.DARK_AQUA + "you successfully wapped to: " + ChatColor.YELLOW + Warp);
+						player.sendMessage(ChatColor.DARK_AQUA + "You successfully warped to " + ChatColor.YELLOW + warp);
 						player.teleport(location);
 						return true;
 					}else{
-						player.sendMessage(ChatColor.DARK_AQUA + "The warp " + ChatColor.YELLOW + Warp + ChatColor.DARK_AQUA + " does not exist.");
+						player.sendMessage(ChatColor.RED + "The warp " + ChatColor.YELLOW + warp + ChatColor.RED + " does not exist.");
 					}
 				}else{
 					player.sendMessage(ChatColor.RED + "Please specify where to warp.");

@@ -55,3 +55,14 @@ notaro.kill
 notaro.warp
 notaro.setwarp
 notaro.delwarp
+notaro.home
+notaro.sethome
+notaro.mute
+notaro.unmute
+notaro.item
+notaro.ping
+notaro.exp
+notaro.hat
+notaro.workbench
+notaro.world
+notaro.give
