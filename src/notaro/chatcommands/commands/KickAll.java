@@ -1,4 +1,6 @@
 package notaro.chatcommands.commands;
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -7,6 +9,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class KickAll implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public KickAll(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -20,6 +27,7 @@ public class KickAll implements CommandExecutor{
 				int i = 0;
 				for(Player online : Bukkit.getOnlinePlayers()){
 					if (!online.equals(player)){
+						plugin.KickedPlayers.add(online.getName());
 						online.kickPlayer(ChatColor.RED + "Emergency kick. All players have been kicked.");
 						i++;
 					}

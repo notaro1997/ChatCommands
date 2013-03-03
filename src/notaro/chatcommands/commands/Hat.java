@@ -28,7 +28,7 @@ public class Hat implements CommandExecutor{
 				if(player.getItemInHand().getType() != Material.AIR){
 					ItemStack item = player.getItemInHand().clone();
 					if(item.getType().getMaxDurability() == 0){
-						player.sendMessage(ChatColor.YELLOW + "I like your " + ChatColor.GOLD + player.getItemInHand().getType() + ChatColor.YELLOW + " hat.");
+						player.sendMessage(ChatColor.GOLD + "I like your " + ChatColor.YELLOW + player.getItemInHand().getType().toString().toLowerCase() + ChatColor.GOLD + " hat.");
 						item.setAmount(1);
 						inv.remove(item);
 						inv.setHelmet(item);

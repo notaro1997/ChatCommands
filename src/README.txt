@@ -66,3 +66,5 @@ notaro.hat
 notaro.workbench
 notaro.world
 notaro.give
+notaro.tpto
+notaro.quit

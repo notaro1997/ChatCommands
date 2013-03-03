@@ -1,5 +1,11 @@
 v9.5
 + Added /tpto command! Tp to coordinates!
++ Added /quit command! Type /quit then some words to have a custon quit message!
+* Fixed error in /kick.
+* Fixed error in /ban.
+* Fixed error in /tp.
+* Fixed error in /summon
+* Nolonger shows the default quit/exit message when executing /kick, /ban, /kickall, or /quit.
 
 v9.4
 + Added /item command! Give yourself any item! And you can specify the amount!

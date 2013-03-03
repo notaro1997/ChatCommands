@@ -191,3 +191,6 @@ commands:
     tpto:
       description: Teleport to a set of coords.
       -usage: /tpto
+    quit:
+      description: Type /quit then have a custon quit msg.
+      -usage: /quit

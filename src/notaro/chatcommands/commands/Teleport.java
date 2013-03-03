@@ -22,11 +22,11 @@ public class Teleport implements CommandExecutor{
 			return true;
 		}
 		Player player = (Player) sender;
-		Player target = Bukkit.getPlayer(args[0]);
-		String Target = target.getName();
 		TpBlockFile TpBlockFile = plugin.TpBlockPlayers;
 		if(cmd.getName().equalsIgnoreCase("tp") && args.length >= 1){
 			if(player.hasPermission("notaro.tp") || player.hasPermission("notaro.*")){
+				Player target = Bukkit.getPlayer(args[0]);
+				String Target = target.getName();
 				if(!TpBlockFile.contains(Target)){
 					player.teleport(target);
 					player.sendMessage(ChatColor.DARK_AQUA + "You teleported to " + target.getDisplayName() + ChatColor.DARK_AQUA + "!");
@@ -40,6 +40,7 @@ public class Teleport implements CommandExecutor{
 			}
 		}else if(cmd.getName().equalsIgnoreCase("summon") && args.length == 1){
 			if(player.hasPermission("notaro.summon") || player.hasPermission("notaro.*")){
+				Player target = Bukkit.getPlayer(args[0]);
 				target.teleport(player);
 				player.sendMessage(ChatColor.DARK_AQUA + "You summoned " + target.getDisplayName() + ChatColor.DARK_AQUA + "!");
 				target.sendMessage(ChatColor.DARK_AQUA + player.getDisplayName() +" summoned you." + ChatColor.DARK_AQUA + "!");

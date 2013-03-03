@@ -1,7 +1,6 @@
 package notaro.chatcommands.commands;
 
 import notaro.chatcommands.ChatCommands;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,10 +8,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Kick implements CommandExecutor {
+public class Quit implements CommandExecutor{
 
 	private ChatCommands plugin;
-	public Kick(ChatCommands plugin){
+	public Quit(ChatCommands plugin){
 		this.plugin = plugin;
 	}
 
@@ -23,25 +22,26 @@ public class Kick implements CommandExecutor {
 			return true;
 		}
 		Player player = (Player) sender;
-		if(cmd.getName().equalsIgnoreCase("kick")){
-			if(player.hasPermission("notaro.kick") || player.hasPermission("notaro.*")){
-				Player target = Bukkit.getPlayer(args[0]);
+		if(cmd.getName().equalsIgnoreCase("quit") && args.length < 15){
+			if(player.hasPermission("notaro.quit") || player.hasPermission("notaro.*")){
 				if(args.length != 0){
-					int i = 1;
+					int i = 0;
 					int para = args.length; 
 					String MSG = "";
 					while(i < para){
 						MSG = MSG + " " + args[i];
 						i++;
 					}
-					plugin.KickedPlayers.add(target.getName());
-					target.kickPlayer(ChatColor.DARK_RED + "KICKED!" + ChatColor.AQUA + " Reason: " + ChatColor.RED + MSG);
-					Bukkit.getServer().broadcastMessage(ChatColor.BLUE + target.getName() + " has been kicked by " + player.getName());
+					plugin.KickedPlayers.add(player.getName());
+					Bukkit.getServer().broadcastMessage(ChatColor.DARK_GRAY + player.getDisplayName() + " quit - " + ChatColor.YELLOW + MSG); 
+					player.kickPlayer(ChatColor.DARK_AQUA + "Goodbye.");
 				}
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.kick " + ChatColor.RED + "to perform this command.");
+				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.quit " + ChatColor.RED + "to perform this command.");
 			}
+		}else{
+			player.sendMessage(ChatColor.RED + "Your quit msg must be less then 15 words.");
 		}
-		return false;
+		return false;	
 	}
 }

@@ -14,6 +14,7 @@ public class ChatCommands extends JavaPlugin{
 
 	public Log log;
 	public ArrayList<String> enabledPlayers;
+	public ArrayList<String> KickedPlayers;
 	public UpdateChecker updateChecker;
 	public HideFile HiddenPlayers;
 	public TpBlockFile TpBlockPlayers;
@@ -43,6 +44,7 @@ public class ChatCommands extends JavaPlugin{
 		this.getWarpData().loadData();
 		this.log = new Log(this);
 		this.enabledPlayers = new ArrayList<String>();
+		this.KickedPlayers = new ArrayList<String>();
 		this.registerEvents(this);
 		this.RegisterCommands(this);
 		this.UpdateChecker(this);
@@ -87,8 +89,8 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("1").setExecutor(new Gamemode());
 		getCommand("2").setExecutor(new Gamemode());
 		getCommand("sm").setExecutor(new Mob());
-		getCommand("ban").setExecutor(new Ban());
-		getCommand("kick").setExecutor(new Kick());
+		getCommand("ban").setExecutor(new Ban(this));
+		getCommand("kick").setExecutor(new Kick(this));
 		getCommand("satan").setExecutor(new Satan());
 		getCommand("ea").setExecutor(new ExplodingArrowsExecutor(this));
 		getCommand("killall").setExecutor(new KillAll());
@@ -106,7 +108,7 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("info").setExecutor(new Info());
 		getCommand("who").setExecutor(new Who());
 		getCommand("updatechecker").setExecutor(new UpdateCheckerCommand(this));
-		getCommand("kickall").setExecutor(new KickAll());
+		getCommand("kickall").setExecutor(new KickAll(this));
 		getCommand("kill").setExecutor(new Kill());
 		getCommand("setwarp").setExecutor(new SetWarp(this));
 		getCommand("delwarp").setExecutor(new SetWarp(this));
@@ -123,6 +125,7 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("world").setExecutor(new World());
 		getCommand("give").setExecutor(new Give(this));
 		getCommand("tpto").setExecutor(new Tpto());
+		getCommand("quit").setExecutor(new Quit(this));
 	}
 
 	private void registerEvents(ChatCommands instance){
@@ -132,6 +135,7 @@ public class ChatCommands extends JavaPlugin{
 		manager.registerEvents(new HideListener(this), this);
 		manager.registerEvents(new UpdateCheckerListener(this), this);
 		manager.registerEvents(new MuteListener(this), this);
+		manager.registerEvents(new KickRemoveMsgListener(this), this);
 
 	}
 
