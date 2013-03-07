@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,6 +11,12 @@ import org.bukkit.entity.Player;
 
 public class Info implements CommandExecutor{
 
+	private ChatCommands plugin;
+	public Info(ChatCommands instance){
+		plugin = instance;
+	}
+	
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -26,6 +34,14 @@ public class Info implements CommandExecutor{
 				player.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + target.getAddress().getPort());
 				player.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + target.getGameMode());
 				player.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + target.getLevel());
+				
+				if(!plugin.KickedPlayers.toString().replace("[", "").replace("]", "").contains(target.getName())){
+					player.sendMessage(ChatColor.DARK_GREEN + "Kicked within last reload: " + ChatColor.AQUA + " False");
+				}else{
+					player.sendMessage(ChatColor.DARK_GREEN + "Kicked within last reload: " + ChatColor.AQUA + " True");
+				}
+				/*
+				*/
 				if(!target.isOp()){
 					player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "False");
 				}else{

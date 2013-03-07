@@ -3,12 +3,12 @@ package notaro.chatcommands;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import notaro.chatcommands.commands.*;
 import notaro.chatcommands.files.*;
 import notaro.chatcommands.listeners.*;
-
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChatCommands extends JavaPlugin{
 
@@ -22,44 +22,38 @@ public class ChatCommands extends JavaPlugin{
 	public MuteFile MutedPlayers;
 
 	public void onEnable(){
-
-		(new File(this.getDataFolder().getAbsolutePath())).mkdirs();
-		this.MutedPlayers = new MuteFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "MutedPlayers.txt"));
-		this.MutedPlayers.loadData();
 		
 		(new File(this.getDataFolder().getAbsolutePath())).mkdirs();
-		this.HiddenPlayers = new HideFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "HiddenPlayers.txt"));
-		this.HiddenPlayers.loadData();
-
-		(new File(this.getDataFolder().getAbsolutePath())).mkdirs();
-		this.TpBlockPlayers = new TpBlockFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "TpBlockPlayers.txt"));
-		this.TpBlockPlayers.loadData();
-
-
-		(new File(this.getDataFolder().getAbsolutePath())).mkdirs();
-		this.UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "UpdateChecker.txt"));
-		this.UpdateTrueOrFalse.loadData();
-
-		this.getHomeData().loadData();
-		this.getWarpData().loadData();
-		this.log = new Log(this);
-		this.enabledPlayers = new ArrayList<String>();
-		this.KickedPlayers = new ArrayList<String>();
-		this.registerEvents(this);
-		this.RegisterCommands(this);
-		this.UpdateChecker(this);
-
+		
+		registerEvents(this);
+		RegisterCommands(this);
+		UpdateChecker(this);
+		log = new Log(this);
+		enabledPlayers = new ArrayList<String>();
+		KickedPlayers = new ArrayList<String>();
+		MutedPlayers.loadData();
+		HiddenPlayers.loadData();
+		TpBlockPlayers.loadData();
+		UpdateTrueOrFalse.loadData();
+		getHomeData().loadData();
+		getWarpData().loadData();
+		
+		MutedPlayers = new MuteFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "MutedPlayers.txt"));
+		HiddenPlayers = new HideFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "HiddenPlayers.txt"));
+		TpBlockPlayers = new TpBlockFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "TpBlockPlayers.txt"));
+		UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "UpdateChecker.txt"));
+		
 	}
 
 	public void onDisable(){
-
-		this.getHomeData().saveData();
-		this.getWarpData().saveData();
-		this.HiddenPlayers.saveData();
-		this.TpBlockPlayers.saveData();
-		this.UpdateTrueOrFalse.saveData();
-		this.MutedPlayers.saveData();
-
+		
+		HiddenPlayers.saveData();
+		TpBlockPlayers.saveData();
+		UpdateTrueOrFalse.saveData();
+		MutedPlayers.saveData();
+		getHomeData().saveData();
+		getWarpData().saveData();
+		
 	}
 
 	private void RegisterCommands(ChatCommands plugin){
@@ -105,7 +99,7 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("weather").setExecutor(new Weather());
 		getCommand("lightning").setExecutor(new Lightning());
 		getCommand("enderchest").setExecutor(new EnderChest());
-		getCommand("info").setExecutor(new Info());
+		getCommand("info").setExecutor(new Info(this));
 		getCommand("who").setExecutor(new Who());
 		getCommand("updatechecker").setExecutor(new UpdateCheckerCommand(this));
 		getCommand("kickall").setExecutor(new KickAll(this));
@@ -136,6 +130,8 @@ public class ChatCommands extends JavaPlugin{
 		manager.registerEvents(new UpdateCheckerListener(this), this);
 		manager.registerEvents(new MuteListener(this), this);
 		manager.registerEvents(new KickRemoveMsgListener(this), this);
+		manager.registerEvents(new PlayerJoinEventListener(this), this);
+		manager.registerEvents(new PlayerQuitEventListener(this), this);
 
 	}
 

@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class Item implements CommandExecutor{
+	
 	public static ChatCommands plugin;
 	public Item(ChatCommands instance){
 		plugin = instance;
