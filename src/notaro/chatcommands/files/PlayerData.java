@@ -9,47 +9,47 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import notaro.chatcommands.ChatCommands;
 
-public class WarpFile {
+public class PlayerData {
 
 	private ChatCommands plugin;
-	public WarpFile(ChatCommands plugin){
+	public PlayerData(ChatCommands plugin){
 		this.plugin = plugin;
 	}
 
-	private File WarpFile = null;
-	private FileConfiguration Warps = null;
+	private File KickFile = null;
+	private FileConfiguration KickedPlayers = null;
 
 
 	public void loadData(){
-		this.getWarps().options().copyDefaults(true);
+		this.getPlayers().options().copyDefaults(true);
 		saveData();
 	}
 
 	public void reloadData(){
-		if(WarpFile == null){
-			WarpFile = new File(new File(plugin.getDataFolder(), "TpData"), "Warps.yml");
+		if(KickFile == null){
+			KickFile = new File(new File(plugin.getDataFolder(), "Logging"), "Players.yml");
 		}
-		Warps = YamlConfiguration.loadConfiguration(WarpFile);
-		InputStream ConfigStream = plugin.getResource("TpData\\WarpFile.yml");
+		KickedPlayers = YamlConfiguration.loadConfiguration(KickFile);
+		InputStream ConfigStream = plugin.getResource("Logging\\Players.yml");
 		if(ConfigStream != null){
 			YamlConfiguration Config = YamlConfiguration.loadConfiguration(ConfigStream);
-			Warps.setDefaults(Config);
+			KickedPlayers.setDefaults(Config);
 		}
 	}
 
-	public FileConfiguration getWarps(){
-		if(Warps == null){
+	public FileConfiguration getPlayers(){
+		if(KickedPlayers == null){
 			reloadData();
 		}
-		return Warps;
+		return KickedPlayers;
 	}
 
 	public void saveData(){
-		if (Warps == null || WarpFile == null){
+		if (KickedPlayers == null || KickFile == null){
 			return;
 		}
 		try{
-			Warps.save(WarpFile);
+			KickedPlayers.save(KickFile);
 		}catch (IOException error){
 			error.printStackTrace();
 		}

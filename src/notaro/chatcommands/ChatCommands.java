@@ -22,38 +22,42 @@ public class ChatCommands extends JavaPlugin{
 	public MuteFile MutedPlayers;
 
 	public void onEnable(){
-		
-		(new File(this.getDataFolder().getAbsolutePath())).mkdirs();
-		
-		registerEvents(this);
-		RegisterCommands(this);
-		UpdateChecker(this);
+
 		log = new Log(this);
 		enabledPlayers = new ArrayList<String>();
 		KickedPlayers = new ArrayList<String>();
-		MutedPlayers.loadData();
-		HiddenPlayers.loadData();
-		TpBlockPlayers.loadData();
-		UpdateTrueOrFalse.loadData();
+		registerEvents(this);
+		RegisterCommands(this);
+		UpdateChecker(this);
 		getHomeData().loadData();
 		getWarpData().loadData();
-		
-		MutedPlayers = new MuteFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "MutedPlayers.txt"));
-		HiddenPlayers = new HideFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "HiddenPlayers.txt"));
-		TpBlockPlayers = new TpBlockFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "TpBlockPlayers.txt"));
-		UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder().getAbsolutePath() + File.separator + "UpdateChecker.txt"));
-		
+		getPlayerData().loadData();
+
+		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
+		MutedPlayers = new MuteFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "MutedPlayers.txt"));
+		this.MutedPlayers.loadData();
+		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
+		HiddenPlayers = new HideFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "HiddenPlayers.txt"));
+		this.HiddenPlayers.loadData();
+		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
+		TpBlockPlayers = new TpBlockFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "TpBlockPlayers.txt"));
+		this.TpBlockPlayers.loadData();
+		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
+		UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "UpdateChecker.txt"));
+		this.UpdateTrueOrFalse.loadData();
+
 	}
 
 	public void onDisable(){
-		
+
 		HiddenPlayers.saveData();
 		TpBlockPlayers.saveData();
 		UpdateTrueOrFalse.saveData();
 		MutedPlayers.saveData();
 		getHomeData().saveData();
 		getWarpData().saveData();
-		
+		getPlayerData().loadData();
+
 	}
 
 	private void RegisterCommands(ChatCommands plugin){
@@ -153,5 +157,9 @@ public class ChatCommands extends JavaPlugin{
 
 	public HomeFile getHomeData(){
 		return new HomeFile(this);
+	}
+
+	public PlayerData getPlayerData(){
+		return new PlayerData(this);
 	}
 }

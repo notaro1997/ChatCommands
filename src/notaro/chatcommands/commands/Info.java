@@ -1,6 +1,7 @@
 package notaro.chatcommands.commands;
 
 import notaro.chatcommands.ChatCommands;
+import notaro.chatcommands.files.PlayerData;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,8 +16,7 @@ public class Info implements CommandExecutor{
 	public Info(ChatCommands instance){
 		plugin = instance;
 	}
-	
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -24,9 +24,11 @@ public class Info implements CommandExecutor{
 			return true;
 		}
 		Player player = (Player) sender;
+		PlayerData PlayerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("info") && args.length == 1){
 			if(player.hasPermission("notaro.info") || player.hasPermission("notaro.*")){
 				Player target = Bukkit.getPlayer(args[0]);
+				int I = PlayerData.getPlayers().getInt(target.getName() + ".Kicked");
 				player.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + target.getName() + ChatColor.GOLD + " *******");
 				player.sendMessage(ChatColor.DARK_GREEN + "Player: " + ChatColor.AQUA + target.getName());
 				player.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + target.getWorld().getName());
@@ -34,14 +36,7 @@ public class Info implements CommandExecutor{
 				player.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + target.getAddress().getPort());
 				player.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + target.getGameMode());
 				player.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + target.getLevel());
-				
-				if(!plugin.KickedPlayers.toString().replace("[", "").replace("]", "").contains(target.getName())){
-					player.sendMessage(ChatColor.DARK_GREEN + "Kicked within last reload: " + ChatColor.AQUA + " False");
-				}else{
-					player.sendMessage(ChatColor.DARK_GREEN + "Kicked within last reload: " + ChatColor.AQUA + " True");
-				}
-				/*
-				*/
+				player.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + I + " time(s)");
 				if(!target.isOp()){
 					player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "False");
 				}else{

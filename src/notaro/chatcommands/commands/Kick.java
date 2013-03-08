@@ -1,6 +1,7 @@
 package notaro.chatcommands.commands;
 
 import notaro.chatcommands.ChatCommands;
+import notaro.chatcommands.files.PlayerData;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,9 +24,11 @@ public class Kick implements CommandExecutor {
 			return true;
 		}
 		Player player = (Player) sender;
+		PlayerData PlayerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("kick")){
 			if(player.hasPermission("notaro.kick") || player.hasPermission("notaro.*")){
 				Player target = Bukkit.getPlayer(args[0]);
+				String targetName = target.getName();
 				if(args.length != 0){
 					int i = 1;
 					int para = args.length; 
@@ -34,6 +37,9 @@ public class Kick implements CommandExecutor {
 						MSG = MSG + " " + args[i];
 						i++;
 					}
+					int I = PlayerData.getPlayers().getInt(targetName + ".Kicked");
+					PlayerData.getPlayers().set(targetName + ".Kicked", I + 1);
+					PlayerData.saveData();
 					plugin.KickedPlayers.add(target.getName());
 					target.kickPlayer(ChatColor.DARK_RED + "KICKED!" + ChatColor.AQUA + " Reason: " + ChatColor.RED + MSG);
 					Bukkit.getServer().broadcastMessage(ChatColor.BLUE + target.getName() + " has been kicked by " + player.getName());

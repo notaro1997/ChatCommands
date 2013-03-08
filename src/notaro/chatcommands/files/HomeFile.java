@@ -27,10 +27,10 @@ public class HomeFile {
 
 	public void reloadData(){
 		if(HomeFile == null){
-			HomeFile = new File(plugin.getDataFolder(), "Homes.yml");
+			HomeFile = new File(new File (plugin.getDataFolder(), "TpData"), "Homes.yml");
 		}
 		Homes = YamlConfiguration.loadConfiguration(HomeFile);
-		InputStream ConfigStream = plugin.getResource("HomeFile.yml");
+		InputStream ConfigStream = plugin.getResource("TpData\\HomeFile.yml");
 		if(ConfigStream != null){
 			YamlConfiguration Config = YamlConfiguration.loadConfiguration(ConfigStream);
 			Homes.setDefaults(Config);

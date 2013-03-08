@@ -1,3 +1,9 @@
+v9.6
+* Organized files into folders.
+* Files were added.
++ Now when typing /info it will tell you how many times the player has been kicked.
+* Changed alot of code in the main.
+
 v9.5
 + Added /tpto command! Tp to coordinates!
 + Added /quit command! Type /quit then some words to have a custon quit message!
