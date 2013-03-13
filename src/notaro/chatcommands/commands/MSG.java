@@ -22,7 +22,8 @@ public class MSG implements CommandExecutor{
 					if(args.length >= 1){
 						Player target = Bukkit.getPlayer(args[0]);
 						if(target != null){
-							int i = 1; int para = args.length;
+							int i = 1; 
+							int para = args.length;
 							String msg = "";
 							while(i < para){
 								msg = msg + " " + args[i];

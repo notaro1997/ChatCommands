@@ -1,8 +1,14 @@
 v9.6
++ Now when typing /info it will tell you how many times the player has been kicked.
++ Now when typing /info it will tell you when the player first joined the server.
++ Now when typing /info it will tell you when the player was last seen.
++ Data for /info is now stored in a file, so you can check player info on offline players!!!
 * Organized files into folders.
 * Files were added.
-+ Now when typing /info it will tell you how many times the player has been kicked.
+* A new file is created called PlayerData, which tracks data of players,  starting when they first log on.
 * Changed alot of code in the main.
+* Fixed error with /ea
+* Fixed error with /0, /1, and /2
 
 v9.5
 + Added /tpto command! Tp to coordinates!

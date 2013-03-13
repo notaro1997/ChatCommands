@@ -27,10 +27,10 @@ public class PlayerData {
 
 	public void reloadData(){
 		if(KickFile == null){
-			KickFile = new File(new File(plugin.getDataFolder(), "Logging"), "Players.yml");
+			KickFile = new File(new File(plugin.getDataFolder(), "Logging"), "PlayerData.yml");
 		}
 		KickedPlayers = YamlConfiguration.loadConfiguration(KickFile);
-		InputStream ConfigStream = plugin.getResource("Logging\\Players.yml");
+		InputStream ConfigStream = plugin.getResource("Logging\\PlayerData.yml");
 		if(ConfigStream != null){
 			YamlConfiguration Config = YamlConfiguration.loadConfiguration(ConfigStream);
 			KickedPlayers.setDefaults(Config);

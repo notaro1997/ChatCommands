@@ -22,6 +22,19 @@ public class ChatCommands extends JavaPlugin{
 	public MuteFile MutedPlayers;
 
 	public void onEnable(){
+		
+		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
+		MutedPlayers = new MuteFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "MutedPlayers.txt"));
+		this.MutedPlayers.loadData();
+		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
+		HiddenPlayers = new HideFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "HiddenPlayers.txt"));
+		this.HiddenPlayers.loadData();
+		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
+		TpBlockPlayers = new TpBlockFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "TpBlockPlayers.txt"));
+		this.TpBlockPlayers.loadData();
+		(new File(this.getDataFolder(), "ServerData")).mkdirs();
+		UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder(), "ServerData" + File.separator + "UpdateChecker.txt"));
+		this.UpdateTrueOrFalse.loadData();
 
 		log = new Log(this);
 		enabledPlayers = new ArrayList<String>();
@@ -32,19 +45,6 @@ public class ChatCommands extends JavaPlugin{
 		getHomeData().loadData();
 		getWarpData().loadData();
 		getPlayerData().loadData();
-
-		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
-		MutedPlayers = new MuteFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "MutedPlayers.txt"));
-		this.MutedPlayers.loadData();
-		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
-		HiddenPlayers = new HideFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "HiddenPlayers.txt"));
-		this.HiddenPlayers.loadData();
-		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
-		TpBlockPlayers = new TpBlockFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "TpBlockPlayers.txt"));
-		this.TpBlockPlayers.loadData();
-		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
-		UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "UpdateChecker.txt"));
-		this.UpdateTrueOrFalse.loadData();
 
 	}
 
@@ -90,7 +90,7 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("ban").setExecutor(new Ban(this));
 		getCommand("kick").setExecutor(new Kick(this));
 		getCommand("satan").setExecutor(new Satan());
-		getCommand("ea").setExecutor(new ExplodingArrowsExecutor(this));
+		getCommand("ea").setExecutor(new ExplodingArrows(this));
 		getCommand("killall").setExecutor(new KillAll());
 		getCommand("invis").setExecutor(new Invis());
 		getCommand("vis").setExecutor(new Invis());
@@ -129,7 +129,6 @@ public class ChatCommands extends JavaPlugin{
 	private void registerEvents(ChatCommands instance){
 		PluginManager manager = this.getServer().getPluginManager();
 		manager.registerEvents(new ExplodingArrowsListener(this), this);
-		manager.registerEvents(new ExplodingArrowsFireListener(this), this);
 		manager.registerEvents(new HideListener(this), this);
 		manager.registerEvents(new UpdateCheckerListener(this), this);
 		manager.registerEvents(new MuteListener(this), this);

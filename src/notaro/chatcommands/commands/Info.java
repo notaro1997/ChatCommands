@@ -3,7 +3,6 @@ package notaro.chatcommands.commands;
 import notaro.chatcommands.ChatCommands;
 import notaro.chatcommands.files.PlayerData;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -27,20 +26,34 @@ public class Info implements CommandExecutor{
 		PlayerData PlayerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("info") && args.length == 1){
 			if(player.hasPermission("notaro.info") || player.hasPermission("notaro.*")){
-				Player target = Bukkit.getPlayer(args[0]);
-				int I = PlayerData.getPlayers().getInt(target.getName() + ".Kicked");
-				player.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + target.getName() + ChatColor.GOLD + " *******");
-				player.sendMessage(ChatColor.DARK_GREEN + "Player: " + ChatColor.AQUA + target.getName());
-				player.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + target.getWorld().getName());
-				player.sendMessage(ChatColor.DARK_GREEN + "IP: " + ChatColor.AQUA + target.getAddress().getHostName());
-				player.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + target.getAddress().getPort());
-				player.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + target.getGameMode());
-				player.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + target.getLevel());
-				player.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + I + " time(s)");
-				if(!target.isOp()){
-					player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "False");
+				String target = String.valueOf(args[0]);
+				if(PlayerData.getPlayers().contains(target)){
+					String world = PlayerData.getPlayers().getString(target + ".World");
+					String ip = PlayerData.getPlayers().getString(target + ".Ip");
+					int port = PlayerData.getPlayers().getInt(target + ".Port");
+					String gamemode = PlayerData.getPlayers().getString(target + ".Gamemode");
+					String level = PlayerData.getPlayers().getString(target + ".Level");
+					String joindate = PlayerData.getPlayers().getString(target + ".JoinDate");
+					String lastseen = PlayerData.getPlayers().getString(target + ".LastSeen");
+					String op = PlayerData.getPlayers().getString(target + ".Op");
+					int kicked = PlayerData.getPlayers().getInt(target + ".Kicked");
+					player.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + target + ChatColor.GOLD + " *******");
+					player.sendMessage(ChatColor.DARK_GREEN + "Username: " + ChatColor.AQUA + target);
+					player.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + world);
+					player.sendMessage(ChatColor.DARK_GREEN + "IP: " + ChatColor.AQUA + ip);
+					player.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + port);
+					player.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + gamemode);
+					player.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + level);
+					player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + op);
+					if(!(lastseen == null)){
+						player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen);
+					}else{
+						player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + "Today, or unknown.");
+					}
+					player.sendMessage(ChatColor.DARK_GREEN + "Join Date: " + ChatColor.AQUA + joindate);
+					player.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + kicked + " time(s)");
 				}else{
-					player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "True");
+					player.sendMessage(ChatColor.RED + "That player is not in any server records.");
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.info " + ChatColor.RED + "to perform this command.");

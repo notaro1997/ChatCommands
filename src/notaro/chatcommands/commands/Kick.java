@@ -37,8 +37,8 @@ public class Kick implements CommandExecutor {
 						MSG = MSG + " " + args[i];
 						i++;
 					}
-					int I = PlayerData.getPlayers().getInt(targetName + ".Kicked");
-					PlayerData.getPlayers().set(targetName + ".Kicked", I + 1);
+					int k = PlayerData.getPlayers().getInt(targetName + ".Kicked");
+					PlayerData.getPlayers().set(targetName + ".Kicked", k + 1);
 					PlayerData.saveData();
 					plugin.KickedPlayers.add(target.getName());
 					target.kickPlayer(ChatColor.DARK_RED + "KICKED!" + ChatColor.AQUA + " Reason: " + ChatColor.RED + MSG);

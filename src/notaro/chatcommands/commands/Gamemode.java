@@ -22,15 +22,15 @@ public class Gamemode implements CommandExecutor{
 			}else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.0 " + ChatColor.RED + "to perform this command.");	
 			}
-		}else if(cmd.getName().equalsIgnoreCase("1") || player.hasPermission("notaro.*")){
-			if(player.hasPermission("notaro.1")){
+		}else if(cmd.getName().equalsIgnoreCase("1")){
+			if(player.hasPermission("notaro.1") || player.hasPermission("notaro.*")){
 				player.setGameMode(GameMode.CREATIVE);
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now in GameMode 1 (Creative)");
 			}else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.1 " + ChatColor.RED + "to perform this command.");	
 			}   
-		}else if(cmd.getName().equalsIgnoreCase("2") || player.hasPermission("notaro.*")){
-			if(player.hasPermission("notaro.2")){
+		}else if(cmd.getName().equalsIgnoreCase("2")){
+			if(player.hasPermission("notaro.2") || player.hasPermission("notaro.*")){
 				player.setGameMode(GameMode.ADVENTURE);
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now in GameMode 2 (Adventure)");
 			}
