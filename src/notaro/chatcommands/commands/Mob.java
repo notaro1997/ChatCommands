@@ -46,7 +46,7 @@ public class Mob implements CommandExecutor{
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SPIDER"));
 					return true;
 				}else if(mob.equalsIgnoreCase("cavespider")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("CAVE_SPIDER"));
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("CAVESPIDER"));
 					return true;
 				}else if(mob.equalsIgnoreCase("ghast")){
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("GHAST"));
@@ -55,19 +55,19 @@ public class Mob implements CommandExecutor{
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ENDERMAN"));
 					return true;
 				}else if(mob.equalsIgnoreCase("enderdragon")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("ENDER_DRAGON"));
+					player.getWorld().spawnEntity(player.getTargetBlock(null, 600).getLocation(), EntityType.ENDER_DRAGON);
 					return true;
 				}else if(mob.equalsIgnoreCase("blaze")){
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("BLAZE"));
 					return true;
 				}else if(mob.equalsIgnoreCase("magmacube")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("MAGMA_CUBE"));
+					player.getWorld().spawnEntity(player.getTargetBlock(null, 600).getLocation(), EntityType.MAGMA_CUBE);
 					return true;
 				}else if(mob.equalsIgnoreCase("mooshroom")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("MUSHROOM_COW"));
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("MUSHROOMCOW"));
 					return true;
 				}else if(mob.equalsIgnoreCase("pigzombie")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("PIG_ZOMBIE"));
+					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("PIGZOMBIE"));
 					return true;
 				}else if(mob.equalsIgnoreCase("silverfish")){
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("SILVERFISH"));
@@ -93,13 +93,13 @@ public class Mob implements CommandExecutor{
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("WITCH"));
 					return true;
 				}else if(mob.equalsIgnoreCase("wither")){	
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("WITHER"));
+					player.getWorld().spawnEntity(player.getTargetBlock(null, 600).getLocation(), EntityType.WITHER);
 					return true;
 				}else if(mob.equalsIgnoreCase("ocelot")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("OCELOT"));
+					player.getWorld().spawnEntity(player.getTargetBlock(null, 600).getLocation(), EntityType.OCELOT);
 					return true;
 				}else if(mob.equalsIgnoreCase("golem")){
-					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("IRON_GOLEM"));
+					player.getWorld().spawnEntity(player.getTargetBlock(null, 600).getLocation(), EntityType.IRON_GOLEM);
 					return true;
 				}else{
 					player.sendMessage(ChatColor.DARK_AQUA + "What mob is that?");
@@ -109,7 +109,7 @@ public class Mob implements CommandExecutor{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.sm " + ChatColor.RED + "to perform this command.");
 			}
 		}else{
-			player.sendMessage(ChatColor.DARK_AQUA + "Correct syntax: /sm mobtype ");
+			player.sendMessage(ChatColor.RED + "Type /sm or /mob, then a mob.");
 		}
 		return false;
 	}

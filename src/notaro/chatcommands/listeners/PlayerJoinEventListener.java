@@ -28,18 +28,19 @@ public class PlayerJoinEventListener implements Listener{
 		Date date = new Date();
 		if(PlayerData.getPlayers().getString(player.getName() + ".JoinDate") == null){
 			PlayerData.getPlayers().set(player.getName() + ".JoinDate", dateFormat.format(date));
-		} 
+			PlayerData.saveData();
+		}
+		PlayerData.getPlayers().set(player.getName() + ".World", player.getWorld().getName());
+		PlayerData.getPlayers().set(player.getName() + ".Ip", player.getAddress().getHostName());
+		PlayerData.getPlayers().set(player.getName() + ".Port", player.getAddress().getPort());
+		PlayerData.getPlayers().set(player.getName() + ".Gamemode", player.getGameMode().toString().toLowerCase());
+		PlayerData.getPlayers().set(player.getName() + ".Level", player.getLevel());
+		PlayerData.saveData();
 		if(player.isOp()){
 			PlayerData.getPlayers().set(player.getName() + ".Op", true);
+			PlayerData.saveData();
 		}else{
 			PlayerData.getPlayers().set(player.getName() + ".Op", false);
-			PlayerData.getPlayers().set(player.getName() + ".World", player.getWorld().getName());
-			PlayerData.getPlayers().set(player.getName() + ".Ip", player.getAddress().getHostName());
-			PlayerData.getPlayers().set(player.getName() + ".Port", player.getAddress().getPort());
-			PlayerData.getPlayers().set(player.getName() + ".Gamemode", player.getGameMode().toString().toLowerCase());
-			PlayerData.getPlayers().set(player.getName() + ".Level", player.getLevel());
-			PlayerData.saveData();
-			PlayerData.reloadData();
-		}		
+		}
 	}
 }

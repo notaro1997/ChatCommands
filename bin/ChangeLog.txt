@@ -5,10 +5,17 @@ v9.6
 + Data for /info is now stored in a file, so you can check player info on offline players!!!
 * Organized files into folders.
 * Files were added.
-* A new file is created called PlayerData, which tracks data of players,  starting when they first log on.
+* A new file is created called PlayerData, which tracks data of players, starting when they first log on.
 * Changed alot of code in the main.
 * Fixed error with /ea
 * Fixed error with /0, /1, and /2
+* Fixed error with spawning cave spider
+* Fixed error with spawning golem
+* Fixed error with spawning wither
+* Fixed error with spawning witch
+* Fixed error with spawning magma cube
+* Fixed error with spawning ender dragon
+* Now you can type /sm OR /mob
 
 v9.5
 + Added /tpto command! Tp to coordinates!

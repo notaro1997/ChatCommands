@@ -31,11 +31,13 @@ public class PlayerQuitEventListener implements Listener{
 		PlayerData.getPlayers().set(player.getName() + ".Port", player.getAddress().getPort());
 		PlayerData.getPlayers().set(player.getName() + ".Gamemode", player.getGameMode().toString().toLowerCase());
 		PlayerData.getPlayers().set(player.getName() + ".Level", player.getLevel());
+		PlayerData.saveData();
 		if(player.isOp()){
 			PlayerData.getPlayers().set(player.getName() + ".Op", true);
+			PlayerData.saveData();
 		}else{
 			PlayerData.getPlayers().set(player.getName() + ".Op", false);	
+			PlayerData.saveData();
 		}	
-		PlayerData.saveData();
 	}
 }

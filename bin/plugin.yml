@@ -80,6 +80,7 @@ commands:
     sm:
       description: spawn any mob
       -usage: /sm <mob>
+      aliases: [mob]  
     ban:
       description: Bans a specified player
       -usage: /ban
