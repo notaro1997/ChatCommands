@@ -1,3 +1,6 @@
+v9.7
+* Changed code in /info. Still works the same.
+
 v9.6
 + Now when typing /info it will tell you how many times the player has been kicked.
 + Now when typing /info it will tell you when the player first joined the server.

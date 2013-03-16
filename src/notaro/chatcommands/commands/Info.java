@@ -27,13 +27,21 @@ public class Info implements CommandExecutor{
 		PlayerData PlayerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("info") && args.length == 1){
 			if(player.hasPermission("notaro.info") || player.hasPermission("notaro.*")){
-				Player target = Bukkit.getPlayer(args[0]);
-				if(!(target == null)){
-					String targetName = target.getName();
-					int kicked = PlayerData.getPlayers().getInt(targetName + ".Kicked");  
-					String joindate = PlayerData.getPlayers().getString(targetName + ".JoinDate");
-					String lastseen = PlayerData.getPlayers().getString(targetName + ".LastSeen");
-
+				Player target = Bukkit.getPlayer(args[0]); // Physical player for online access
+				// Data for offline players \/ Data is resaved everytime the player logs on and off.
+				String world = PlayerData.getPlayers().getString(args[0] + ".World");        
+				String ip = PlayerData.getPlayers().getString(args[0] + ".Ip");
+				int port = PlayerData.getPlayers().getInt(args[0] + ".Port");
+				String gamemode = PlayerData.getPlayers().getString(args[0] + ".Gamemode");
+				String level = PlayerData.getPlayers().getString(args[0] + ".Level");
+				String joindate = PlayerData.getPlayers().getString(args[0] + ".JoinDate");
+				String lastseen = PlayerData.getPlayers().getString(args[0] + ".LastSeen");
+				String op = PlayerData.getPlayers().getString(args[0] + ".Op");
+				int kicked = PlayerData.getPlayers().getInt(args[0] + ".Kicked");  
+				// if the player isn't null, aka if the player is online.
+				if(!(target == null)){ 
+					String targetName = target.getName(); // Name of the physical player
+					// Messages that are sent to the command sender directly from the online player.
 					player.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + targetName + ChatColor.GOLD + " *******");
 					player.sendMessage(ChatColor.DARK_GREEN + "Username: " + ChatColor.AQUA + targetName);
 					player.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + target.getWorld().getName());
@@ -46,26 +54,17 @@ public class Info implements CommandExecutor{
 					}else{
 						player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "False");
 					}
-					if(!(lastseen == null)){
+					if(!(lastseen == null)){ 
 						player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen);
-					}else{
+					}else{ // if they havent logged off yet
 						player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + "Today, or unknown.");
 					}
 					player.sendMessage(ChatColor.DARK_GREEN + "Join Date: " + ChatColor.AQUA + joindate);
 					player.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + kicked + " time(s)");
-					
-				}else{
-					if(PlayerData.getPlayers().contains(args[0])){
-						String world = PlayerData.getPlayers().getString(args[0] + ".World");        
-						String ip = PlayerData.getPlayers().getString(args[0] + ".Ip");
-						int port = PlayerData.getPlayers().getInt(args[0] + ".Port");
-						String gamemode = PlayerData.getPlayers().getString(args[0] + ".Gamemode");
-						String level = PlayerData.getPlayers().getString(args[0] + ".Level");
-						String joindate = PlayerData.getPlayers().getString(args[0] + ".JoinDate");
-						String lastseen = PlayerData.getPlayers().getString(args[0] + ".LastSeen");
-						String op = PlayerData.getPlayers().getString(args[0] + ".Op");
-						int kicked = PlayerData.getPlayers().getInt(args[0] + ".Kicked");  
 
+				}else{
+					if(PlayerData.getPlayers().contains(args[0])){ //args[0] is the offline player.
+						// Messages sent to the player of data for an offline player.
 						player.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + args[0] + ChatColor.GOLD + " *******");
 						player.sendMessage(ChatColor.DARK_GREEN + "Username: " + ChatColor.AQUA + args[0]);
 						player.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + world);
@@ -74,15 +73,13 @@ public class Info implements CommandExecutor{
 						player.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + gamemode);
 						player.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + level);
 						player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + op);
-						if(!(lastseen == null)){
-							player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen);
-						}else{
-							player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + "Today, or unknown.");
-						}
+						// If the player is offline, then there HAS to be a last seen date, because they have already been on once.
+						player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen); 
 						player.sendMessage(ChatColor.DARK_GREEN + "Join Date: " + ChatColor.AQUA + joindate);
 						player.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + kicked + " time(s)");
 					}else{
 						player.sendMessage(ChatColor.RED + "There are no server records for " + args[0]);
+						// if the player has never been on the server, while ChatCommands has been installed.
 					}
 				}
 			}else{
@@ -90,6 +87,7 @@ public class Info implements CommandExecutor{
 			}
 		}else{
 			player.sendMessage(ChatColor.RED + "Please specify who's info to view.");
+			// no player was specified (args[0])
 		}
 		return false;
 	}
