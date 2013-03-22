@@ -24,7 +24,7 @@ public class UpdateChecker {
 		}
 	}
 
-	public boolean updateChatCommands(){
+	public boolean ChatCommandsUpdateNeeded(){
 		try {
 			InputStream input = this.filesFeed.openConnection().getInputStream();
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);

@@ -21,7 +21,7 @@ public class UpdateCheckerListener implements Listener{
 		UpdateCheckerFile UpdateCheckerFile = plugin.UpdateTrueOrFalse;
 		Player player = event.getPlayer();
 		if(player.isOp()){
-			if (plugin.updateChecker.updateChatCommands()){
+			if (plugin.updateChecker.ChatCommandsUpdateNeeded()){
 				if(UpdateCheckerFile.contains("True")){
 					player.sendMessage(ChatColor.DARK_GREEN + "[" + ChatColor.DARK_RED + "ChatCommands" + ChatColor.DARK_GREEN + "] " + ChatColor.DARK_PURPLE + "Update avalable! Get it here:");
 					player.sendMessage(ChatColor.DARK_BLUE + "http://dev.bukkit.org/server-mods/chatcommands/");

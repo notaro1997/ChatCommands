@@ -134,14 +134,13 @@ public class ChatCommands extends JavaPlugin{
 		manager.registerEvents(new MuteListener(this), this);
 		manager.registerEvents(new KickRemoveMsgListener(this), this);
 		manager.registerEvents(new JoinLeaveListener(this), this);
-		manager.registerEvents(new PlayerBreakEventListener(this), this);
-		manager.registerEvents(new PlayerPlaceEventListener(this), this);
-
+		manager.registerEvents(new BreakPlaceListener(this), this);
+		manager.registerEvents(new BreakPlaceListener(this), this);
 	}
 
 	private void UpdateChecker(ChatCommands instance){
 		this.updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/server-mods/chatcommands/files.rss");
-		if (this.updateChecker.updateChatCommands()){
+		if (this.updateChecker.ChatCommandsUpdateNeeded()){
 			if(this.UpdateTrueOrFalse.contains("True")){
 				this.log.info("A new version of ChatCommands is out: " +  this.updateChecker.getVersion());
 				this.log.info("Get it at: " + this.updateChecker.getLink());
