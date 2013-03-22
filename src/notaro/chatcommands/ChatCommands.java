@@ -45,7 +45,6 @@ public class ChatCommands extends JavaPlugin{
 		getHomeData().loadData();
 		getWarpData().loadData();
 		getPlayerData().loadData();
-
 	}
 
 	public void onDisable(){
@@ -57,7 +56,6 @@ public class ChatCommands extends JavaPlugin{
 		getHomeData().saveData();
 		getWarpData().saveData();
 		getPlayerData().loadData();
-
 	}
 
 	private void RegisterCommands(ChatCommands plugin){
