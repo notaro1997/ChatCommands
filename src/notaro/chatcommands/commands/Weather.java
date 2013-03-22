@@ -15,16 +15,15 @@ public class Weather implements CommandExecutor{
 		}
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("weather") && args.length == 1){
-			if(player.hasPermission("notaro.weather") || player.hasPermission("notaro.*")){
-				String weather = String.valueOf(args[0]);
-				if(weather.equalsIgnoreCase("sun")){
+			if(player.hasPermission("notaro.weather") || player.hasPermission("notaro.*")){	
+				if(args[0].equalsIgnoreCase("sun")){
 					player.getWorld().setStorm(false);
 					player.getWorld().setThundering(false);
 				}
-				if(weather.equalsIgnoreCase("rain")){
+				if(args[0].equalsIgnoreCase("rain")){
 					player.getWorld().setStorm(true);	
 				}
-				if(weather.equalsIgnoreCase("storm")){
+				if(args[0].equalsIgnoreCase("storm")){
 					player.getWorld().setThundering(true);
 				}
 			}

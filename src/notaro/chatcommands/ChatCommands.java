@@ -2,6 +2,7 @@ package notaro.chatcommands;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,7 +13,7 @@ import notaro.chatcommands.listeners.*;
 
 public class ChatCommands extends JavaPlugin{
 
-	public Log log;
+	public Logger log = Logger.getLogger("Minecraft");
 	public ArrayList<String> enabledPlayers;
 	public ArrayList<String> KickedPlayers;
 	public UpdateChecker updateChecker;
@@ -22,7 +23,7 @@ public class ChatCommands extends JavaPlugin{
 	public MuteFile MutedPlayers;
 
 	public void onEnable(){
-		
+
 		(new File(this.getDataFolder(), "PlayerSettings")).mkdirs();
 		MutedPlayers = new MuteFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "MutedPlayers.txt"));
 		this.MutedPlayers.loadData();
@@ -36,7 +37,6 @@ public class ChatCommands extends JavaPlugin{
 		UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder(), "ServerData" + File.separator + "UpdateChecker.txt"));
 		this.UpdateTrueOrFalse.loadData();
 
-		log = new Log(this);
 		enabledPlayers = new ArrayList<String>();
 		KickedPlayers = new ArrayList<String>();
 		registerEvents(this);
@@ -133,8 +133,9 @@ public class ChatCommands extends JavaPlugin{
 		manager.registerEvents(new UpdateCheckerListener(this), this);
 		manager.registerEvents(new MuteListener(this), this);
 		manager.registerEvents(new KickRemoveMsgListener(this), this);
-		manager.registerEvents(new PlayerJoinEventListener(this), this);
-		manager.registerEvents(new PlayerQuitEventListener(this), this);
+		manager.registerEvents(new JoinLeaveListener(this), this);
+		manager.registerEvents(new PlayerBreakEventListener(this), this);
+		manager.registerEvents(new PlayerPlaceEventListener(this), this);
 
 	}
 

@@ -24,7 +24,7 @@ public class Kick implements CommandExecutor {
 			return true;
 		}
 		Player player = (Player) sender;
-		PlayerData PlayerData = plugin.getPlayerData();
+		PlayerData playerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("kick")){
 			if(player.hasPermission("notaro.kick") || player.hasPermission("notaro.*")){
 				Player target = Bukkit.getPlayer(args[0]);
@@ -37,9 +37,9 @@ public class Kick implements CommandExecutor {
 						MSG = MSG + " " + args[i];
 						i++;
 					}
-					int k = PlayerData.getPlayers().getInt(targetName + ".Kicked");
-					PlayerData.getPlayers().set(targetName + ".Kicked", k + 1);
-					PlayerData.saveData();
+					int k = playerData.getPlayers().getInt(targetName + ".Kicked");
+					playerData.getPlayers().set(targetName + ".Kicked", k + 1);
+					playerData.saveData();
 					plugin.KickedPlayers.add(target.getName());
 					target.kickPlayer(ChatColor.DARK_RED + "KICKED!" + ChatColor.AQUA + " Reason: " + ChatColor.RED + MSG);
 					Bukkit.getServer().broadcastMessage(ChatColor.BLUE + target.getName() + " has been kicked by " + player.getName());

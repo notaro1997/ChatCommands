@@ -1,5 +1,11 @@
 v9.7
++ Now when typing /info it will tell you how many blocks the player has broken.
++ Now when typing /info it will tell you how many blocks the player has placed.
 * Changed code in /info. Still works the same.
+* Removed Log class. uses minecraft logger now.
+* Combined code for Join/Leave listeners.
+* Now when a player logs on for the first time, all fields in PlayerData file will be occupied.
+* Changed ReadMe.txt
 
 v9.6
 + Now when typing /info it will tell you how many times the player has been kicked.
