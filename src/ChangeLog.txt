@@ -1,4 +1,5 @@
 v9.7
+- commands: 62
 + Now when typing /info it will tell you how many blocks the player has broken.
 + Now when typing /info it will tell you how many blocks the player has placed.
 * Changed code in /info. Still works the same.
@@ -7,7 +8,8 @@ v9.7
 * Now when a player logs on for the first time, all fields in PlayerData file will be occupied.
 * Changed ReadMe.txt
 
-v9.6
+v9.6 
+- commands: 62
 + Now when typing /info it will tell you how many times the player has been kicked.
 + Now when typing /info it will tell you when the player first joined the server.
 + Now when typing /info it will tell you when the player was last seen.
@@ -26,7 +28,8 @@ v9.6
 * Fixed error with spawning ender dragon
 * Now you can type /sm OR /mob
 
-v9.5
+v9.5: 
+- commands: 62
 + Added /tpto command! Tp to coordinates!
 + Added /quit command! Type /quit then some words to have a custon quit message!
 * Fixed error in /kick.
@@ -35,7 +38,8 @@ v9.5
 * Fixed error in /summon
 * Nolonger shows the default quit/exit message when executing /kick, /ban, /kickall, or /quit.
 
-v9.4
+v9.4: 
+- commands: 60
 + Added /item command! Give yourself any item! And you can specify the amount!
 + Added /give command! Give any player any amount of any item!
 + Added /hat command! Make what your holding your head!
@@ -47,13 +51,16 @@ v9.4
 + Added /workbench command!(or /bench) open a workbench without having one!
 * A new file will be created called MutedPlayers.txt
 * Fixed errors.
+* Fixed small bugs.
 
-v9.3
+v9.3: 
+- commands: 51
 * Fixed new bugs with new commands.
 * Fixed misspellings.
 * Changed some colors with new commands.
 
-v9.2
+v9.2: 
+- commands: 52
 + Added /home command. Teleport to your home.
 + Added /sethome command! set your home where your standing.
 + Added warp command! warp to a specified warp.
@@ -62,14 +69,15 @@ v9.2
 + Added kickall command! kick everyone except you!
 + Added kill command! kill a specified player!
 + Added message on login when there is an update available.
++ Added notaro.* permission! Gives you all commands!
 * Now when using /sm mobs will spawn where you are pointing.
 * Changed Mob code.
 * New file will be created to store warp data.
 * Fixed colors in commands.
 * Fixed errors with certain commands.
-* Added notaro.* permission! Gives you all commands!
 
-v9.1
+v9.1: 
+- commands: 45
 + Added /enderchest command! View a players ender chest.
 + Added /lightning command! Strike lightning where your pointing, or a specified player.
 + Added /info command! Check the info of a player.
@@ -86,12 +94,13 @@ v9.1
 * Changed file code.
 * Added packaged to organize code.
 
-v9.0
+v9.0: 
+- commands: 41
 * Removed the "By notaro1997" in the version number.
 * Changed code in call classes for "player"
 * Renamed some code, for certain classes.
 * Fixed error when multiple players are hidden.
-* When being hidden, you will fisically be hidden as well.
+* When being hidden, you will physically be hidden as well.
 * Removed setting the playerListName to "YouAreHidden" when hidden.
 * Changed some code on the Hide class.
 * Now if you are currently hidden when relogging, it will remove the join msg.
@@ -126,15 +135,18 @@ v9.0
 + Added /weather sun, rain, and storm.
 + Added update checker.
 
-v8.9 (Not released)
+v8.9: (Not released)
+- commands: 39
 * Fixed bugs. 
 * Tests.
 
-v8.8
+v8.8: 
+- commands: 39
 + Added /tpblock command. set tpblock to on, or off. type /tpblock staus to see if it is on or off.
 * If you type just /time, or just /tpblock it will tell you your options.
 
-v8.7
+v8.7: 
+- commands: 38
 * Removed player hiding in /invis. now just makes player invisible.
 * Removed player being shown again in /vis.
 * Now when typeing /hide your PlayerListName for only you is "YouAreHidden"
@@ -143,23 +155,28 @@ v8.7
 + Added /hide command! (Hides your player in the tab menu, ect.)
 + Added /show command! (Makes your player able to be seen again in the tab menu, ect.)
 
-v8.6
+v8.6: 
+- commands: 36
 + Added /tp command! Teleport to players!
 + Added /summon command! Teleport players to you!
 
-v8.5
+v8.5: 
+- commands: 34
 + Added to /invis. Now hides tab menu name as well.
 
-v8.4
+v8.4: 
+- commands: 34
 + Added /time command (/time day, /time night, and /time normal)
 + Added /invis command (Makes your player invisible!)
 + Added /vis (Makes your player visible again.)
 + Added ChangeLog.txt to plugin.
 
-v8.3 (Not released)
+v8.3: (Not released)
+- commands: 30
 * Tests.
 
-v8.2
+v8.2: 
+- commands: 29
 + Added the /killall command
 * Removed /bitchslapserver
 * Changed /bitchslap so if you don't type a name after /bitchslap it will bitchslap the whole server
@@ -167,7 +184,8 @@ v8.2
 * Changed /hug so if you don't type a name after /hug it will hug the whole server
 * Changed the permission for /m from notaro.msg to notaro.m
 
-v8.1
+v8.1: 
+- commands: 30
 * Fixed ban command error.
 * Fixed kick command error.
 * Fixed compatibility error for CB 1.4.4 and 1.4.5
@@ -176,17 +194,21 @@ v8.1
 * Removed the (yolo) when banning.
 * Changed the loop in banning/kicking for the reason.
 
-v8.0
+v8.0: 
+- commands: 30
 + Added new exploding arrows!!! /ea to toggle! (bearing you have the permission)
 * Fixed the server crash bug when commands were submitted via console.
 
-v7.9 (Not released)
+v7.9: 
+- commands: 28 (Not released)
 * Fixed the server crash bug when commands were submitted via console
 
-v7.8
+v7.8: 
+- commands: 28
 + Added the /ban command, supports a reason. Also the ban msg is in color, a picture will be uploaded in the pictures tab.
 + Added the /kick command, supports a reason. Also the kick msg is in color, a picture will be uploaded in the pictures tab.
 + Added the /satan command, same as the god command, except with satan speaking.
 
-v7.7
+v7.7: 
+- commands: 26
 + Now when setting a new spawn point or teleporting to spawn it will tell you the name of the world you are in.

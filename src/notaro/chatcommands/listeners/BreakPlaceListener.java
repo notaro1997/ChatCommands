@@ -17,10 +17,11 @@ public class BreakPlaceListener implements Listener{
 		this.plugin = plugin;
 	}
 
-	PlayerData playerData = plugin.getPlayerData();
+	
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onBlockPlace(BlockPlaceEvent event){
 		Player player = event.getPlayer();
+		PlayerData playerData = plugin.getPlayerData();
 		int p = playerData.getPlayers().getInt(player.getName() + ".BlocksPlaced");
 		playerData.getPlayers().set(player.getName() + ".BlocksPlaced", p + 1);
 		playerData.saveData();		
@@ -28,6 +29,7 @@ public class BreakPlaceListener implements Listener{
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onBlockBreak(BlockBreakEvent event){
 		Player player = event.getPlayer();
+		PlayerData playerData = plugin.getPlayerData();
 		int b = playerData.getPlayers().getInt(player.getName() + ".BlocksBroken");
 		playerData.getPlayers().set(player.getName() + ".BlocksBroken", b + 1);
 		playerData.saveData();		

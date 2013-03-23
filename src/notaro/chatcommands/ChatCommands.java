@@ -138,13 +138,13 @@ public class ChatCommands extends JavaPlugin{
 
 	private void UpdateChecker(ChatCommands instance){
 		this.updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/server-mods/chatcommands/files.rss");
-		if (this.updateChecker.ChatCommandsUpdateNeeded()){
-			if(this.UpdateTrueOrFalse.contains("True")){
+		if(this.UpdateTrueOrFalse.contains("True")){
+			if (this.updateChecker.ChatCommandsUpdateNeeded()){	
 				this.log.info("A new version of ChatCommands is out: " +  this.updateChecker.getVersion());
 				this.log.info("Get it at: " + this.updateChecker.getLink());
-			}if(this.UpdateTrueOrFalse.contains("False")){
-				return;
 			}
+		} if(this.UpdateTrueOrFalse.contains("False")){
+			return;
 		}
 	}
 
