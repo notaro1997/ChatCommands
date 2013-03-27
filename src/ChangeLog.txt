@@ -4,6 +4,8 @@ v9.8
 * Added a constructor to every class.
 * It will now log in the console whenever a command is used.
 * Fixed permission bug with /home
+* Boomstick item is now called "Boomstick".
+* Superpick item is now called "Superpick".
 
 v9.7
 - commands: 62

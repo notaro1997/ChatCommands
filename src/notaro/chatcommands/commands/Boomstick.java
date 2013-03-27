@@ -35,8 +35,9 @@ public class Boomstick implements CommandExecutor{
 				ItemStack boomstick = new ItemStack(Material.BLAZE_ROD, 1);
 				boomstick.addUnsafeEnchantment(Enchantment.KNOCKBACK, 10);
 				boomstick.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 5);
-				ItemMeta meta = (ItemMeta) boomstick.getItemMeta();
-				meta.setDisplayName(ChatColor.DARK_AQUA + "Boomstick");
+				ItemMeta meta = boomstick.getItemMeta();
+				meta.setDisplayName(ChatColor.AQUA + "Boomstick");
+				boomstick.setItemMeta(meta);
 				inventory.addItem(boomstick);	
 			}else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.boomstick " + ChatColor.RED + "to perform this command."); 

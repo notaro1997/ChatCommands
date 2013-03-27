@@ -11,6 +11,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class Superpick implements CommandExecutor{
 
@@ -50,6 +51,9 @@ public class Superpick implements CommandExecutor{
 				superpick.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 10);
 				superpick.addUnsafeEnchantment(Enchantment.DAMAGE_ARTHROPODS, 10);
 				superpick.getItemMeta().setDisplayName("Boomstick");
+				ItemMeta meta = superpick.getItemMeta();
+				meta.setDisplayName(ChatColor.AQUA + "Superpick");
+				superpick.setItemMeta(meta);
 				inventory.addItem(superpick);
 			}else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.superpick " + ChatColor.RED + "to perform this command.");
