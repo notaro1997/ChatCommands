@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 public class Info implements CommandExecutor{
 
 	private ChatCommands plugin;
-	public Info(ChatCommands instance){
-		plugin = instance;
+	public Info(ChatCommands plugin){
+		this.plugin = plugin;
 	}
 
 	@Override
@@ -27,6 +27,7 @@ public class Info implements CommandExecutor{
 		PlayerData playerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("info") && args.length == 1){
 			if(player.hasPermission("notaro.info") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: INFO");
 				Player target = Bukkit.getPlayer(args[0]); // Physical player for online access
 				// if the player isn't null, aka if the player is online.
 				if(!(target == null)){ 

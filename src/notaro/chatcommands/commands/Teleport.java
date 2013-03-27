@@ -11,10 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Teleport implements CommandExecutor{
+	
 	private ChatCommands plugin;
 	public Teleport(ChatCommands plugin){
 		this.plugin = plugin;
 	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -25,6 +27,7 @@ public class Teleport implements CommandExecutor{
 		TpBlockFile TpBlockFile = plugin.TpBlockPlayers;
 		if(cmd.getName().equalsIgnoreCase("tp") && args.length == 1){
 			if(player.hasPermission("notaro.tp") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: TP");
 				Player target = Bukkit.getPlayer(args[0]);
 				String Target = target.getName();
 				if(!TpBlockFile.contains(Target)){
@@ -40,6 +43,7 @@ public class Teleport implements CommandExecutor{
 			}
 		}else if(cmd.getName().equalsIgnoreCase("summon") && args.length == 1){
 			if(player.hasPermission("notaro.summon") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: SUMMON");
 				Player target = Bukkit.getPlayer(args[0]);
 				target.teleport(player);
 				player.sendMessage(ChatColor.DARK_AQUA + "You summoned " + target.getDisplayName() + ChatColor.DARK_AQUA + "!");

@@ -24,6 +24,7 @@ public class KickAll implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("kickall")){
 			if(player.hasPermission("notaro.kickall") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: KICKALL");
 				int i = 0;
 				for(Player online : Bukkit.getOnlinePlayers()){
 					if (!online.equals(player)){

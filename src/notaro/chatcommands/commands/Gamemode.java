@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -9,6 +11,11 @@ import org.bukkit.entity.Player;
 
 public class Gamemode implements CommandExecutor{
 
+	private ChatCommands plugin;
+	public Gamemode(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (sender instanceof Player == false){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
@@ -17,6 +24,7 @@ public class Gamemode implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("0")){
 			if(player.hasPermission("notaro.0") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: 0");
 				player.setGameMode(GameMode.SURVIVAL);
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now in GameMode 0 (Survival)");
 			}else{
@@ -24,6 +32,7 @@ public class Gamemode implements CommandExecutor{
 			}
 		}else if(cmd.getName().equalsIgnoreCase("1")){
 			if(player.hasPermission("notaro.1") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: 1");
 				player.setGameMode(GameMode.CREATIVE);
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now in GameMode 1 (Creative)");
 			}else{
@@ -31,6 +40,7 @@ public class Gamemode implements CommandExecutor{
 			}   
 		}else if(cmd.getName().equalsIgnoreCase("2")){
 			if(player.hasPermission("notaro.2") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: 2");
 				player.setGameMode(GameMode.ADVENTURE);
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now in GameMode 2 (Adventure)");
 			}

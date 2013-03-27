@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,6 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Join implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public Join(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -18,6 +25,7 @@ public class Join implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("join")){
 			if(player.hasPermission("notaro.join") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: JOIN");
 				if(args.length != 0){
 					String MSG = args[0];
 					for(int i=1; i < args.length; i++) {

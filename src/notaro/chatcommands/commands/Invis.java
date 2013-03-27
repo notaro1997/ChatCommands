@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,6 +10,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
 public class Invis implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public Invis(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -18,6 +25,7 @@ public class Invis implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("invis")){
 			if(player.hasPermission("notaro.invis") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: INVIS");
 				PotionEffectType effect = (PotionEffectType.INVISIBILITY);
 				player.addPotionEffect(effect.createEffect(999999999, 1));
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now invisible.");
@@ -26,6 +34,7 @@ public class Invis implements CommandExecutor{
 			}
 		} 
 		else if(cmd.getName().equalsIgnoreCase("vis") || player.hasPermission("notaro.*")){
+			plugin.log.info(player.getName() + ": ChatCommands: VIS");
 			if(player.hasPermission("notaro.vis")){
 				player.removePotionEffect(PotionEffectType.INVISIBILITY);
 				player.sendMessage(ChatColor.DARK_AQUA + "You are no longer invisible.");

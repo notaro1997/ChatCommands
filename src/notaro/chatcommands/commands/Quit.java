@@ -24,6 +24,7 @@ public class Quit implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("quit") && args.length < 15){
 			if(player.hasPermission("notaro.quit") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: QUIT");
 				if(args.length != 0){
 					int i = 0;
 					int para = args.length; 

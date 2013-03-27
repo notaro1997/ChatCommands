@@ -10,10 +10,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Mute implements CommandExecutor{
+	
 	private ChatCommands plugin;
 	public Mute(ChatCommands plugin){
 		this.plugin = plugin;
 	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -24,6 +26,7 @@ public class Mute implements CommandExecutor{
 		MuteFile MuteFile = plugin.MutedPlayers;
 		if(cmd.getName().equalsIgnoreCase("mute") && args.length == 1){
 			if(player.hasPermission("notaro.mute") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: MUTE");
 				Player target = Bukkit.getPlayer(args[0]);
 				String name = target.getName();
 				MuteFile.add(name);
@@ -35,6 +38,7 @@ public class Mute implements CommandExecutor{
 			}
 		} else if(cmd.getName().equalsIgnoreCase("unmute")){
 			if(player.hasPermission("notaro.unmute")){
+				plugin.log.info(player.getName() + ": ChatCommands: UNMUTE");
 				Player target = Bukkit.getPlayer(args[0]);
 				String name = target.getName();
 				MuteFile.remove(name);

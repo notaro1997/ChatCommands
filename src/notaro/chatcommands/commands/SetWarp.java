@@ -25,6 +25,7 @@ public class SetWarp implements CommandExecutor{
 		}
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("setwarp")){
+			plugin.log.info(player.getName() + ": ChatCommands: SETWARP");
 			WarpFile warps = plugin.getWarpData();
 			String warp = String.valueOf(args[0].toLowerCase());
 			Location location = player.getLocation();
@@ -59,6 +60,7 @@ public class SetWarp implements CommandExecutor{
 		}else if(cmd.getName().equalsIgnoreCase("delwarp")){
 			WarpFile warps = plugin.getWarpData();
 			if(player.hasPermission("notaro.delwarp") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: DELWARP");
 				if(args.length == 1){
 					String Warp = String.valueOf(args[0].toLowerCase());
 					if(warps.getWarps().contains(Warp)){

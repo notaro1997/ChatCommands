@@ -1,4 +1,6 @@
 package notaro.chatcommands.commands;
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -7,6 +9,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Kill implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public Kill(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -17,6 +24,7 @@ public class Kill implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("kill") && args.length == 1){
 			if(player.hasPermission("notaro.kill") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: KILL");
 				Player target = Bukkit.getPlayer(args[0]);
 				target.setHealth(0);
 				target.sendMessage(ChatColor.RED + "Killed.");

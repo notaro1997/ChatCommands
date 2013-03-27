@@ -28,6 +28,7 @@ public class Warp implements CommandExecutor{
 		WarpFile warps = plugin.getWarpData();
 		if(cmd.getName().equalsIgnoreCase("warp") && args.length >= 1){
 			if(player.hasPermission("notaro.warp") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: WARP");
 				if(args.length == 1){
 					String warp = String.valueOf(args[0].toLowerCase());
 					if(warps.getWarps().contains(warp)){

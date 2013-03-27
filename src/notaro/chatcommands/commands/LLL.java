@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,6 +11,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
 public class LLL implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public LLL(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -20,6 +27,7 @@ public class LLL implements CommandExecutor{
 		if(cmd.getName().equalsIgnoreCase("lll") && args.length == 1){
 			if(sender instanceof Player){
 				if(player.hasPermission("notaro.lll") || player.hasPermission("notaro.*")){
+					plugin.log.info(player.getName() + ": ChatCommands: LLL");
 					if(args.length == 1){
 						Player target = Bukkit.getPlayer(args[0]);
 						if(target != null){
@@ -40,6 +48,7 @@ public class LLL implements CommandExecutor{
 
 		} else if(cmd.getName().equalsIgnoreCase("sober") && args.length == 1){
 			if(player.hasPermission("notaro.sober") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: SOBER");
 				if(args.length == 1){
 					Player target = Bukkit.getPlayer(args[0]);
 					if(target != null){

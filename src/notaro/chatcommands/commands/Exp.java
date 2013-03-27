@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,6 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Exp implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public Exp(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -18,6 +25,7 @@ public class Exp implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("exp") && args.length == 2){
 			if(player.hasPermission("notaro.exp") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: EXP");
 				Player target = Bukkit.getPlayer(args[0]);
 				int value = Integer.valueOf(args[1]);
 				target.setLevel(value);

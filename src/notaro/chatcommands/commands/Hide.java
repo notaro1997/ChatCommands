@@ -26,6 +26,7 @@ public class Hide implements CommandExecutor {
 		String name = player.getName();
 		if(cmd.getName().equalsIgnoreCase("hide")){
 			if(player.hasPermission("notaro.hide") || player.hasPermission("notaro.*")){	
+				plugin.log.info(player.getName() + ": ChatCommands: HIDE");
 				HideFile.add(name);
 				HideFile.saveData();
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now being hidden from other players. (Tab menu, ect.)");
@@ -40,6 +41,7 @@ public class Hide implements CommandExecutor {
 		} 
 		else if(cmd.getName().equalsIgnoreCase("show")){
 			if(player.hasPermission("notaro.show") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: SHOW");
 				player.sendMessage(ChatColor.DARK_AQUA + "You are now visible to other players. (Tab menu, ect.)");
 				HideFile.remove(name);
 				HideFile.saveData();

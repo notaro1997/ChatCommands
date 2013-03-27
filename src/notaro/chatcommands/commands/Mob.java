@@ -1,4 +1,11 @@
+/*
+ * 
+ *                         Class not in use!
+ * 
+ */
 package notaro.chatcommands.commands;
+
+import notaro.chatcommands.ChatCommands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,6 +15,12 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class Mob implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public Mob(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String aliases, String[] args) {
@@ -18,6 +31,7 @@ public class Mob implements CommandExecutor{
 		Player player = (Player) sender;
 		if((cmd.getName().equalsIgnoreCase("sm")) && (args.length == 1)){
 			if(player.hasPermission("notaro.sm") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: SM");
 				String mob = String.valueOf(args[0]);
 				if(mob.equalsIgnoreCase("cow")){
 					player.getWorld().spawnCreature(player.getTargetBlock(null, 600).getLocation(), EntityType.fromName("COW"));

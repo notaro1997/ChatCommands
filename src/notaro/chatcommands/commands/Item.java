@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class Item implements CommandExecutor{
-	
+
 	public static ChatCommands plugin;
 	public Item(ChatCommands instance){
 		plugin = instance;
@@ -25,7 +25,8 @@ public class Item implements CommandExecutor{
 		}
 		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("item")){
-			if(sender.hasPermission("notaro.item")){
+			if(player.hasPermission("notaro.item") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: ITEM");
 				if(args.length == 0){
 					player.sendMessage(ChatColor.RED + "Type: /item ITEM AMOUNT (Amount is optional)");
 					return true;
@@ -68,9 +69,8 @@ public class Item implements CommandExecutor{
 									player.sendMessage(ChatColor.DARK_AQUA + "You received " + ChatColor.YELLOW + value + " " + ChatColor.DARK_PURPLE + material.name().toLowerCase().replace("_", " ") + "'s");
 								}
 								return true;
-							}else{
-								return false;
 							}
+							return false;
 						}
 					}
 				}

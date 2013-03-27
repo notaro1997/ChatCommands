@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,6 +10,11 @@ import org.bukkit.entity.Player;
 
 public class Position implements CommandExecutor{
 
+	private ChatCommands plugin;
+	public Position(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -17,6 +24,7 @@ public class Position implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("position")){
 			if(player.hasPermission("notaro.position") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: POSITION");
 				if(args.length == 0){
 					ChatColor aqua = ChatColor.DARK_AQUA;
 					ChatColor white = ChatColor.WHITE;

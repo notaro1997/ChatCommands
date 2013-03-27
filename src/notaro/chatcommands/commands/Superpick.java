@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -12,6 +14,11 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class Superpick implements CommandExecutor{
 
+	private ChatCommands plugin;
+	public Superpick(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -21,6 +28,7 @@ public class Superpick implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("superpick")){
 			if(player.hasPermission("notaro.superpick") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: SUPERPICK");
 				player.sendMessage(ChatColor.GOLD + "You have now been given a " + ChatColor.AQUA + "superpick");
 				PlayerInventory inventory = player.getInventory();
 				ItemStack superpick= new ItemStack(Material.DIAMOND_PICKAXE, 1);

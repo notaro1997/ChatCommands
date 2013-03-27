@@ -10,10 +10,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class TpBlock implements CommandExecutor{
+	
 	private ChatCommands plugin;
 	public TpBlock(ChatCommands plugin){
 		this.plugin = plugin;
 	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -25,6 +27,7 @@ public class TpBlock implements CommandExecutor{
 		TpBlockFile TpBlockFile = plugin.TpBlockPlayers;
 		if(cmd.getName().equalsIgnoreCase("tpblock") && args.length == 1){
 			if(player.hasPermission("notaro.tpblock") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: TPBLOCK");
 				String tpblock = String.valueOf(args[0]);
 				if(tpblock.equalsIgnoreCase("on")){
 					TpBlockFile.add(name);

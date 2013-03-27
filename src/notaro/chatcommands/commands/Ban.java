@@ -25,6 +25,7 @@ public class Ban implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("ban")){
 			if(sender.hasPermission("notaro.ban") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: BAN");
 				if(args.length != 0){
 					int i = 1;
 					int para = args.length;

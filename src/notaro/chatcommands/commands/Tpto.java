@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -9,6 +11,11 @@ import org.bukkit.entity.Player;
 
 public class Tpto implements CommandExecutor{
 
+	private ChatCommands plugin;
+	public Tpto(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
@@ -17,6 +24,7 @@ public class Tpto implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("tpto") && args.length == 3){
 			if(player.hasPermission("notaro.tpto") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: TPTO");
 				int X = Integer.parseInt(args[0]);
 				int Y = Integer.parseInt(args[1]);
 				int Z = Integer.parseInt(args[2]);

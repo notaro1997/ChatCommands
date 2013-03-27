@@ -15,6 +15,7 @@ public class UpdateCheckerCommand implements CommandExecutor{
 	public UpdateCheckerCommand(ChatCommands plugin){
 		this.plugin = plugin;
 	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -25,6 +26,7 @@ public class UpdateCheckerCommand implements CommandExecutor{
 		UpdateCheckerFile UpdateCheckerFile = plugin.UpdateTrueOrFalse;
 		if(cmd.getName().equalsIgnoreCase("updatechecker") && args.length == 1){
 			if(player.hasPermission("notaro.updatechecker") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: UPDATECHECKER");
 				String update = String.valueOf(args[0]);
 				if(update.equalsIgnoreCase("true")){
 					UpdateCheckerFile.remove("False");

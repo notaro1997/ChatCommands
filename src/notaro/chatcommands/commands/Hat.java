@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -11,6 +13,11 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class Hat implements CommandExecutor{
 
+	private ChatCommands plugin;
+	public Hat(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -20,6 +27,7 @@ public class Hat implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("hat")){
 			if(player.hasPermission("notaro.hat") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: HAT");
 				PlayerInventory inv = player.getInventory();
 				ItemStack hat = inv.getHelmet();
 				if(inv == null || player.getItemInHand().getType() == Material.AIR){

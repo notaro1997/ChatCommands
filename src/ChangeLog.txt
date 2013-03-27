@@ -1,3 +1,10 @@
+v9.8
+- commands: 62
+* Now for /sm or /mob you can type the amount of that mob you want to spawn! ex. /mob cow 1000.
+* Added a constructor to every class.
+* It will now log in the console whenever a command is used.
+* Fixed permission bug with /home
+
 v9.7
 - commands: 62
 + Now when typing /info it will tell you how many blocks the player has broken.

@@ -25,6 +25,7 @@ public class SetHome implements CommandExecutor{
 		}
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("sethome")){
+			plugin.log.info(player.getName() + ": ChatCommands: SETHOME");
 			HomeFile homes = plugin.getHomeData();
 			Location location = player.getLocation();
 			int x = location.getBlockX();

@@ -13,10 +13,10 @@ import org.bukkit.inventory.ItemStack;
 
 
 public class Give implements CommandExecutor{
-	public static ChatCommands plugin;
-	public Give(ChatCommands instance){
-		plugin = instance;
 
+	private ChatCommands plugin;
+	public Give(ChatCommands plugin){
+		this.plugin = plugin;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -36,6 +36,7 @@ public class Give implements CommandExecutor{
 			}
 			if(material != null){
 				if(player.hasPermission("notaro.give")){
+					plugin.log.info(player.getName() + ": ChatCommands: GIVE");
 					Player target = Bukkit.getPlayer(args[0]);
 					if(target != null){
 						if(args.length == 2){

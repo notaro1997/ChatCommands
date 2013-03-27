@@ -26,7 +26,8 @@ public class Home implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("home")){
 			HomeFile Homes = plugin.getHomeData();
-			if(player.hasPermission("notaro.warp") || player.hasPermission("notaro.*")){
+			if(player.hasPermission("notaro.home") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: HOME");
 					String Name = player.getName();
 					if(Homes.getHome().contains(Name)){
 						String world = Homes.getHome().getString(Name + ".world");
@@ -43,7 +44,7 @@ public class Home implements CommandExecutor{
 						player.sendMessage(ChatColor.YELLOW + "You dont have a home set.");
 					}
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.warp " + ChatColor.RED + "to perform this command.");
+				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.home " + ChatColor.RED + "to perform this command.");
 			}
 		}
 		return false;	

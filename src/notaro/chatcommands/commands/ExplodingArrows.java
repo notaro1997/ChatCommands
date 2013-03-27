@@ -25,9 +25,11 @@ public class ExplodingArrows implements CommandExecutor{
 		if (!player.hasPermission("notaro.ea") || !player.hasPermission("notaro.*") || !player.isOp()){
 			player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.ea " + ChatColor.RED + "to perform this command.");
 		} else if (plugin.enabledPlayers.contains(playerName)){
+			plugin.log.info(player.getName() + ": ChatCommands: EA");
 			plugin.enabledPlayers.remove(playerName);
 			player.sendMessage(ChatColor.DARK_AQUA + "Exploding arrows: " + ChatColor.DARK_GREEN + "disabled");
 		} else{
+			plugin.log.info(player.getName() + ": ChatCommands: EA");
 			plugin.enabledPlayers.add(playerName);
 			player.sendMessage(ChatColor.DARK_AQUA + "Exploding arrows: " + ChatColor.DARK_GREEN + "enabled");
 		}

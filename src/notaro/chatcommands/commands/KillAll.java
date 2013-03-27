@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +11,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class KillAll implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public KillAll(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -20,6 +27,7 @@ public class KillAll implements CommandExecutor{
 		String world = player.getWorld().getName();
 		if(cmd.getName().equalsIgnoreCase("killall") && sender instanceof Player){
 			if(player.hasPermission("notaro.killall") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: KILLALL");
 				int i = 0;
 				for(Entity entity: player.getWorld().getEntities()){
 					if(entity instanceof LivingEntity && !(entity instanceof Player)){

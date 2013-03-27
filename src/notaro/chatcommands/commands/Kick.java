@@ -27,6 +27,7 @@ public class Kick implements CommandExecutor {
 		PlayerData playerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("kick")){
 			if(player.hasPermission("notaro.kick") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: KICK");
 				Player target = Bukkit.getPlayer(args[0]);
 				String targetName = target.getName();
 				if(args.length != 0){

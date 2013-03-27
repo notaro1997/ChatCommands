@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -10,6 +12,11 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Heal implements CommandExecutor{
 
+	private ChatCommands plugin;
+	public Heal(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -19,6 +26,7 @@ public class Heal implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("heal") && args.length == 1){
 			if(player.hasPermission("notaro.heal") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: HEAL");
 				if(args.length == 1){
 					Player target = Bukkit.getPlayer(args[0]);
 					if(target != null){

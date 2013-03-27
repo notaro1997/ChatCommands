@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,6 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Weather implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public Weather(ChatCommands plugin){
+		this.plugin = plugin;
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -16,6 +24,7 @@ public class Weather implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("weather") && args.length == 1){
 			if(player.hasPermission("notaro.weather") || player.hasPermission("notaro.*")){	
+				plugin.log.info(player.getName() + ": ChatCommands: WEATHER");
 				if(args[0].equalsIgnoreCase("sun")){
 					player.getWorld().setStorm(false);
 					player.getWorld().setThundering(false);

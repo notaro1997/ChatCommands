@@ -1,5 +1,7 @@
 package notaro.chatcommands.commands;
 
+import notaro.chatcommands.ChatCommands;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,6 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class FakeOp implements CommandExecutor{
+
+	private ChatCommands plugin;
+	public FakeOp(ChatCommands plugin){
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -18,6 +25,7 @@ public class FakeOp implements CommandExecutor{
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("fakeop")){
 			if(player.hasPermission("notaro.fakeop") || player.hasPermission("notaro.*")){
+				plugin.log.info(player.getName() + ": ChatCommands: FAKEOP");
 				if(args.length == 1){
 					Player target = Bukkit.getPlayer(args[0]);
 					target.sendMessage(ChatColor.YELLOW + "You are now op!");
