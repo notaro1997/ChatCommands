@@ -14,7 +14,7 @@ public class Name implements CommandExecutor{
 	public Name(ChatCommands plugin){
 		this.plugin = plugin;
 	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -25,14 +25,13 @@ public class Name implements CommandExecutor{
 		if(cmd.getName().equalsIgnoreCase("name")){
 			if(player.hasPermission("notaro.name") || player.hasPermission("notaro.*")){
 				plugin.log.info(player.getName() + ": ChatCommands: NAME");
-				if(args.length >= 2){
+				if(args.length == 2){
 					ChatColor color = ChatColor.getByChar(args[0]);
-					String name = String.valueOf(args[1]);
-					player.setDisplayName(color + name.toString() + ChatColor.WHITE);
-					player.setPlayerListName(color + name.toString());
-					player.sendMessage(ChatColor.GRAY + "Your name is now: " + color + name.toString());
+					player.setDisplayName(color + args[1].toString() + ChatColor.WHITE);
+					player.setPlayerListName(color + args[1].toString());
+					player.sendMessage(ChatColor.GRAY + "Your name is now: " + color + args[1].toString());
 				}else{
-					player.sendMessage(ChatColor.RED + "Please specify the name you want.");
+					player.sendMessage(ChatColor.RED + "Correct usage: /name colorcode name");
 				}
 			} else{	 
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.name " + ChatColor.RED + "to perform this command."); 

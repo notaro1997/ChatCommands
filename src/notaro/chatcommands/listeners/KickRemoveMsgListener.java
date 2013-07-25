@@ -21,5 +21,5 @@ public class KickRemoveMsgListener implements Listener{
 		if(plugin.KickedPlayers.contains(name)){
 			event.setLeaveMessage(null);
 		}
-	}
+	}	
 }

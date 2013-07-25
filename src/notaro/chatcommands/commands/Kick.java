@@ -19,15 +19,10 @@ public class Kick implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
-			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
-			return true;
-		}
-		Player player = (Player) sender;
 		PlayerData playerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("kick")){
-			if(player.hasPermission("notaro.kick") || player.hasPermission("notaro.*")){
-				plugin.log.info(player.getName() + ": ChatCommands: KICK");
+			if(sender.hasPermission("notaro.kick") || sender.hasPermission("notaro.*")){
+				plugin.log.info(sender.getName() + ": ChatCommands: KICK");
 				Player target = Bukkit.getPlayer(args[0]);
 				String targetName = target.getName();
 				if(args.length != 0){
@@ -43,10 +38,10 @@ public class Kick implements CommandExecutor {
 					playerData.saveData();
 					plugin.KickedPlayers.add(target.getName());
 					target.kickPlayer(ChatColor.DARK_RED + "KICKED!" + ChatColor.AQUA + " Reason: " + ChatColor.RED + MSG);
-					Bukkit.getServer().broadcastMessage(ChatColor.BLUE + target.getName() + " has been kicked by " + player.getName());
+					Bukkit.getServer().broadcastMessage(ChatColor.BLUE + target.getName() + " has been kicked by " + sender.getName());
 				}
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.kick " + ChatColor.RED + "to perform this command.");
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.kick " + ChatColor.RED + "to perform this command.");
 			}
 		}
 		return false;

@@ -1,7 +1,7 @@
 name: ChatCommands
-version: 9.8
+version: 10.3
 main: notaro.chatcommands.ChatCommands
-website: http://notaro1997.webs.com
+website: http://dev.bukkit.org/server-mods/chatcommands/
 author: notaro1997
 loadbefore: [Essentials, WorldEdit, CommandBook]
 commands:
@@ -195,3 +195,39 @@ commands:
     quit:
       description: Type /quit then have a custon quit msg.
       -usage: /quit
+    egg:
+      description: Receive an egg that spawns all mobs!
+      -usage: /egg
+    up:
+      description: Teleport up and amount.
+      -usage: /up
+    head:
+      description: Receive the head of any player!
+      -usage: /head
+    tnt:
+      description: Spawn a primed tnt where you're pointing.
+      -usage: /tnt
+    blockhere:
+      description: Change the type of the block your looking at.
+      -usage: /blockhere
+    block:
+      description: Block certain items or events.
+      -usage: /block
+    unblock:
+      description: Unblock an item or event.
+      -usage: /unblock
+    freeze:
+      description: Freezes a specified player.
+      -usage: /freeze
+    ride:
+      description: Ride a specified player!
+      -usage: /ride
+    god:
+      description: Put a specified player into god mode!
+      -usage: /god
+    spawner:
+      description: Change the mob in a monster spawner.
+      -usage: /spawner
+    chatcolor:
+      description: Changes the color of the chat.
+      -usage: /chatcolor

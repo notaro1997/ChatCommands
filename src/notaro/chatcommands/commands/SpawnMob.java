@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class SpawnMob implements CommandExecutor{
@@ -15,7 +16,7 @@ public class SpawnMob implements CommandExecutor{
 	public SpawnMob(ChatCommands plugin){
 		this.plugin = plugin;
 	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -52,10 +53,23 @@ public class SpawnMob implements CommandExecutor{
 					for (int i = 0; i < amount; i++) {
 
 						if (mobtyp.isSpawnable() && mobtyp.isAlive()) {
-							player.getWorld().spawnEntity(player.getLocation(), mobtyp);
+							if(args.length == 1 || args.length == 2){
+								player.getWorld().spawnEntity(player.getLocation(), mobtyp);
+							}
+							if(args.length == 3){
+								LivingEntity ent = (LivingEntity) player.getWorld().spawnEntity(player.getLocation(), mobtyp);
+								ent.setCustomName(args[2]);
+								ent.setCustomNameVisible(true);
+							}
+							if(args.length == 4){
+								LivingEntity ent = (LivingEntity) player.getWorld().spawnEntity(player.getLocation(), mobtyp);
+								ChatColor color = ChatColor.getByChar(args[3]);
+								ent.setCustomName(color + args[2]);
+								ent.setCustomNameVisible(true);
+							}
 						}
 					} 
-					player.sendMessage(ChatColor.DARK_AQUA + "You spawned " + ChatColor.YELLOW + amount + ChatColor.RED + " " + mobtyp.getName());
+					player.sendMessage(ChatColor.DARK_AQUA + "You spawned " + ChatColor.YELLOW + amount + ChatColor.RED + " " + mobtyp.getName() + "(s)");
 				}
 				else {
 					StringBuilder buf = new StringBuilder();

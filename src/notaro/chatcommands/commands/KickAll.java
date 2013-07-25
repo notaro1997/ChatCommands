@@ -17,25 +17,20 @@ public class KickAll implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
-			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
-			return true;
-		}
-		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("kickall")){
-			if(player.hasPermission("notaro.kickall") || player.hasPermission("notaro.*")){
-				plugin.log.info(player.getName() + ": ChatCommands: KICKALL");
+			if(sender.hasPermission("notaro.kickall") || sender.hasPermission("notaro.*")){
+				plugin.log.info(sender.getName() + ": ChatCommands: KICKALL");
 				int i = 0;
 				for(Player online : Bukkit.getOnlinePlayers()){
-					if (!online.equals(player)){
+					if (!online.equals(sender)){
 						plugin.KickedPlayers.add(online.getName());
 						online.kickPlayer(ChatColor.RED + "Emergency kick. All players have been kicked.");
 						i++;
 					}
 				}
-				player.sendMessage(ChatColor.RED + "Kicked: " + ChatColor.AQUA + i);
+				sender.sendMessage(ChatColor.RED + "Kicked: " + ChatColor.AQUA + i);
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.kickall " + ChatColor.RED + "to perform this command.");
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.kickall " + ChatColor.RED + "to perform this command.");
 			}
 		}
 		return false;	

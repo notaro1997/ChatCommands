@@ -32,13 +32,13 @@ public class KillAll implements CommandExecutor{
 				for(Entity entity: player.getWorld().getEntities()){
 					if(entity instanceof LivingEntity && !(entity instanceof Player)){
 						LivingEntity entitys = (LivingEntity)entity;
-						if(entitys.getLocation().distance(player.getLocation()) > 0){
-							entitys.setHealth(0);
-							i++;
-						}
+						entitys.setHealth(0);
+						i++;	
 					}
 				}
 				player.sendMessage(ChatColor.DARK_AQUA + "Killed " + ChatColor.RED + i + ChatColor.DARK_AQUA + " entitys in world: " + ChatColor.RED + world);
+			}else{
+				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.killall " + ChatColor.RED + "to perform this command.");
 			}
 		}
 		return true;

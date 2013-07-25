@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,13 +16,16 @@ import notaro.chatcommands.listeners.*;
 public class ChatCommands extends JavaPlugin{
 
 	public Logger log = Logger.getLogger("Minecraft");
-	public ArrayList<String> enabledPlayers;
+	public ArrayList<String> explodingArrowsPlayers;
 	public ArrayList<String> KickedPlayers;
+	public ArrayList<String> spawnEggPlayers;
+	public BlockFile BlockedItems;
 	public UpdateChecker updateChecker;
 	public HideFile HiddenPlayers;
 	public TpBlockFile TpBlockPlayers;
-	public UpdateCheckerFile UpdateTrueOrFalse;
 	public MuteFile MutedPlayers;
+	public ServerData getServerData;
+	public ChatColorCommand ChatColorCommand = new ChatColorCommand(this);
 
 	public void onEnable(){
 
@@ -34,28 +39,40 @@ public class ChatCommands extends JavaPlugin{
 		TpBlockPlayers = new TpBlockFile(new File(this.getDataFolder(), "PlayerSettings" + File.separator + "TpBlockPlayers.txt"));
 		this.TpBlockPlayers.loadData();
 		(new File(this.getDataFolder(), "ServerData")).mkdirs();
-		UpdateTrueOrFalse = new UpdateCheckerFile(new File(this.getDataFolder(), "ServerData" + File.separator + "UpdateChecker.txt"));
-		this.UpdateTrueOrFalse.loadData();
+		BlockedItems = new BlockFile(new File(this.getDataFolder(), "ServerData" + File.separator + "BlockedItems.txt"));
+		this.BlockedItems.loadData();
+		(new File(this.getDataFolder(), "ServerData")).mkdirs();
+		getServerData = new ServerData(new File(this.getDataFolder(), "ServerData" + File.separator + "ServerData.txt"));
+		this.getServerData.loadData();
 
-		enabledPlayers = new ArrayList<String>();
+		spawnEggPlayers = new ArrayList<String>();
+		explodingArrowsPlayers = new ArrayList<String>();
 		KickedPlayers = new ArrayList<String>();
 		registerEvents(this);
 		RegisterCommands(this);
 		UpdateChecker(this);
 		getHomeData().loadData();
 		getWarpData().loadData();
-		getPlayerData().loadData();
+		getPlayerData().loadData();	
 	}
 
 	public void onDisable(){
 
 		HiddenPlayers.saveData();
 		TpBlockPlayers.saveData();
-		UpdateTrueOrFalse.saveData();
 		MutedPlayers.saveData();
+		BlockedItems.saveData();
+		getServerData.saveData();
 		getHomeData().saveData();
 		getWarpData().saveData();
-		getPlayerData().loadData();
+		getPlayerData().saveData();
+
+		Bukkit.getServer().broadcastMessage(ChatColor.GRAY + "Succesfully unloaded ChatCommands version " + this.getDescription().getVersion());
+	}
+
+	public void onLoad(){
+
+		Bukkit.getServer().broadcastMessage(ChatColor.AQUA + "Succesfully loaded ChatCommands version " + this.getDescription().getVersion());
 	}
 
 	private void RegisterCommands(ChatCommands plugin){
@@ -85,7 +102,6 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("1").setExecutor(new Gamemode(this));
 		getCommand("2").setExecutor(new Gamemode(this));
 		getCommand("sm").setExecutor(new SpawnMob(this));
-//      getCommand("sm").setExecutor(new Mob(this));       -- Now uses class SpawnMob.
 		getCommand("ban").setExecutor(new Ban(this));
 		getCommand("kick").setExecutor(new Kick(this));
 		getCommand("satan").setExecutor(new Satan(this));
@@ -123,9 +139,22 @@ public class ChatCommands extends JavaPlugin{
 		getCommand("give").setExecutor(new Give(this));
 		getCommand("tpto").setExecutor(new Tpto(this));
 		getCommand("quit").setExecutor(new Quit(this));
+		getCommand("egg").setExecutor(new SpawnEgg(this));
+		getCommand("up").setExecutor(new Up(this));
+		getCommand("head").setExecutor(new Head(this));
+		getCommand("tnt").setExecutor(new Tnt(this));
+		getCommand("blockhere").setExecutor(new BlockHere(this));
+		getCommand("block").setExecutor(new Block(this));
+		getCommand("unblock").setExecutor(new Block(this));
+		getCommand("freeze").setExecutor(new Freeze(this));
+		getCommand("ride").setExecutor(new Ride(this));
+		getCommand("god").setExecutor(new God(this));
+		getCommand("spawner").setExecutor(new Spawner(this));
+		getCommand("chatcolor").setExecutor(ChatColorCommand);
 	}
 
-	private void registerEvents(ChatCommands instance){
+	private void registerEvents(ChatCommands plugin){
+
 		PluginManager manager = this.getServer().getPluginManager();
 		manager.registerEvents(new ExplodingArrowsListener(this), this);
 		manager.registerEvents(new HideListener(this), this);
@@ -135,18 +164,20 @@ public class ChatCommands extends JavaPlugin{
 		manager.registerEvents(new JoinLeaveListener(this), this);
 		manager.registerEvents(new BreakPlaceListener(this), this);
 		manager.registerEvents(new BreakPlaceListener(this), this);
+		manager.registerEvents(new SpawnEggListener(this), this);
+		manager.registerEvents(new BlockedItemsListener(this), this);
+		manager.registerEvents(new GodModeListener(this), this);
+		manager.registerEvents(ChatColorCommand, this);
 	}
 
-	private void UpdateChecker(ChatCommands instance){
+	private void UpdateChecker(ChatCommands plugin){
 		this.updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/server-mods/chatcommands/files.rss");
-		if(this.UpdateTrueOrFalse.contains("True")){
+		if(this.getServerData.contains("UpdateChecker_True")){
 			if (this.updateChecker.ChatCommandsUpdateNeeded()){	
 				this.log.info("A new version of ChatCommands is out: " +  this.updateChecker.getVersion());
 				this.log.info("Get it at: " + this.updateChecker.getLink());
 			}
-		} if(this.UpdateTrueOrFalse.contains("False")){
-			return;
-		}
+		} 
 	}
 
 	public WarpFile getWarpData(){
@@ -160,4 +191,5 @@ public class ChatCommands extends JavaPlugin{
 	public PlayerData getPlayerData(){
 		return new PlayerData(this);
 	}
+
 }

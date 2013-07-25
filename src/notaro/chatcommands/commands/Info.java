@@ -19,15 +19,10 @@ public class Info implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
-			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
-			return true;
-		}
-		Player player = (Player) sender;
 		PlayerData playerData = plugin.getPlayerData();
 		if(cmd.getName().equalsIgnoreCase("info") && args.length == 1){
-			if(player.hasPermission("notaro.info") || player.hasPermission("notaro.*")){
-				plugin.log.info(player.getName() + ": ChatCommands: INFO");
+			if(sender.hasPermission("notaro.info") || sender.hasPermission("notaro.*")){
+				plugin.log.info(sender.getName() + ": ChatCommands: INFO");
 				Player target = Bukkit.getPlayer(args[0]); // Physical player for online access
 				// if the player isn't null, aka if the player is online.
 				if(!(target == null)){ 
@@ -37,23 +32,25 @@ public class Info implements CommandExecutor{
 					int placed = playerData.getPlayers().getInt(targetName + ".BlocksPlaced");
 					String joindate = playerData.getPlayers().getString(targetName + ".JoinDate");
 					String lastseen = playerData.getPlayers().getString(targetName + ".LastSeen");
+					String godmode = playerData.getPlayers().getString(targetName + ".God");
 					// Messages that are sent to the command sender directly from the online player.
-					player.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + targetName + ChatColor.GOLD + " *******");
-					player.sendMessage(ChatColor.DARK_GREEN + "Username: " + ChatColor.AQUA + targetName);
-					player.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + target.getWorld().getName());
-					player.sendMessage(ChatColor.DARK_GREEN + "IP/Hostname: " + ChatColor.AQUA + target.getAddress().getHostName());
-					player.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + target.getAddress().getPort());
-					player.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + target.getGameMode().toString().toLowerCase());
-					player.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + target.getLevel());
-					player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen);
-					player.sendMessage(ChatColor.DARK_GREEN + "Join Date: " + ChatColor.AQUA + joindate);
-					player.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + kicked + " time(s)");
-					player.sendMessage(ChatColor.DARK_GREEN + "Blocks broken: " + ChatColor.AQUA + broken);
-					player.sendMessage(ChatColor.DARK_GREEN + "Blocks placed: " + ChatColor.AQUA + placed);
+					sender.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + targetName + ChatColor.GOLD + " *******");
+					sender.sendMessage(ChatColor.DARK_GREEN + "Username: " + ChatColor.AQUA + targetName);
+					sender.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + target.getWorld().getName());
+					sender.sendMessage(ChatColor.DARK_GREEN + "IP/Hostname: " + ChatColor.AQUA + target.getAddress().getHostName());
+					sender.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + target.getAddress().getPort());
+					sender.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + target.getGameMode().toString().toLowerCase());
+					sender.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + target.getLevel());
+					sender.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen);
+					sender.sendMessage(ChatColor.DARK_GREEN + "Join Date: " + ChatColor.AQUA + joindate);
+					sender.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + kicked + " time(s)");
+					sender.sendMessage(ChatColor.DARK_GREEN + "Blocks broken: " + ChatColor.AQUA + broken);
+					sender.sendMessage(ChatColor.DARK_GREEN + "Blocks placed: " + ChatColor.AQUA + placed);
+					sender.sendMessage(ChatColor.DARK_GREEN + "God mode: " + ChatColor.AQUA + godmode);
 					if(target.isOp()){
-						player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "True");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "True");
 					}else{
-						player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "False");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + "False");
 					}
 				}else{
 					if(playerData.getPlayers().contains(args[0])){ //args[0] is the offline player.
@@ -65,34 +62,36 @@ public class Info implements CommandExecutor{
 						String level = playerData.getPlayers().getString(args[0] + ".Level");
 						String joindate = playerData.getPlayers().getString(args[0] + ".JoinDate");
 						String lastseen = playerData.getPlayers().getString(args[0] + ".LastSeen");
+						String godmode = playerData.getPlayers().getString(args[0] + ".God");
 						String op = playerData.getPlayers().getString(args[0] + ".Op");
 						int kicked = playerData.getPlayers().getInt(args[0] + ".Kicked"); 
 						int broken = playerData.getPlayers().getInt(args[0] + ".BlocksBroken");
 						int placed = playerData.getPlayers().getInt(args[0] + ".BlocksPlaced");
 						// Messages sent to the player of data for an offline player.
-						player.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + args[0] + ChatColor.GOLD + " *******");
-						player.sendMessage(ChatColor.DARK_GREEN + "Username: " + ChatColor.AQUA + args[0]);
-						player.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + world);
-						player.sendMessage(ChatColor.DARK_GREEN + "IP/Hostname: " + ChatColor.AQUA + ip);
-						player.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + port);
-						player.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + gamemode);
-						player.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + level);
-						player.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + op);
-						player.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen); 
-						player.sendMessage(ChatColor.DARK_GREEN + "Join Date: " + ChatColor.AQUA + joindate);
-						player.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + kicked + " time(s)");
-						player.sendMessage(ChatColor.DARK_GREEN + "Blocks broken: " + ChatColor.AQUA + broken);
-						player.sendMessage(ChatColor.DARK_GREEN + "Blocks placed: " + ChatColor.AQUA + placed);
+						sender.sendMessage(ChatColor.GOLD + "******* " + ChatColor.DARK_PURPLE + "Info for " + args[0] + ChatColor.GOLD + " *******");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Username: " + ChatColor.AQUA + args[0]);
+						sender.sendMessage(ChatColor.DARK_GREEN + "World: " + ChatColor.AQUA + world);
+						sender.sendMessage(ChatColor.DARK_GREEN + "IP/Hostname: " + ChatColor.AQUA + ip);
+						sender.sendMessage(ChatColor.DARK_GREEN + "Port: " + ChatColor.AQUA + port);
+						sender.sendMessage(ChatColor.DARK_GREEN + "Gamemode: " + ChatColor.AQUA + gamemode);
+						sender.sendMessage(ChatColor.DARK_GREEN + "Level: " + ChatColor.AQUA + level);
+						sender.sendMessage(ChatColor.DARK_GREEN + "Op: " + ChatColor.AQUA + op);
+						sender.sendMessage(ChatColor.DARK_GREEN + "Last Seen: " + ChatColor.AQUA + lastseen); 
+						sender.sendMessage(ChatColor.DARK_GREEN + "Join Date: " + ChatColor.AQUA + joindate);
+						sender.sendMessage(ChatColor.DARK_GREEN + "Kicked: " + ChatColor.AQUA + kicked + " time(s)");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Blocks broken: " + ChatColor.AQUA + broken);
+						sender.sendMessage(ChatColor.DARK_GREEN + "Blocks placed: " + ChatColor.AQUA + placed);
+						sender.sendMessage(ChatColor.DARK_GREEN + "God mode: " + ChatColor.AQUA + godmode);
 					}else{
-						player.sendMessage(ChatColor.RED + "There are no server records for " + args[0]);
+						sender.sendMessage(ChatColor.RED + "There are no server records for " + args[0]);
 						// if the player has never been on the server, while ChatCommands has been installed.
 					}
 				}
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.info " + ChatColor.RED + "to perform this command.");	
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.info " + ChatColor.RED + "to perform this command.");	
 			}
 		}else{
-			player.sendMessage(ChatColor.RED + "Please specify who's info to view.");
+			sender.sendMessage(ChatColor.RED + "Please specify who's info to view.");
 			// no player was specified (args[0])
 		}
 		return false;

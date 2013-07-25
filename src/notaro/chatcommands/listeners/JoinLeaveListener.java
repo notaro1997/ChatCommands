@@ -51,6 +51,10 @@ public class JoinLeaveListener implements Listener{
 			PlayerData.getPlayers().set(player.getName() + ".Op", false);
 			PlayerData.saveData();
 		}
+		if(PlayerData.getPlayers().getString(player.getName() + ".God") == null){
+			PlayerData.getPlayers().set(player.getName() + ".God", false);
+			PlayerData.saveData();
+		}
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)

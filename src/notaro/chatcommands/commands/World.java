@@ -16,7 +16,7 @@ public class World implements CommandExecutor{
 	public World(ChatCommands plugin){
 		this.plugin = plugin;
 	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -28,9 +28,13 @@ public class World implements CommandExecutor{
 		if(cmd.getName().equalsIgnoreCase("world") && args.length == 1){
 			if(player.hasPermission("notaro.world") || player.hasPermission("notaro.*")){
 				plugin.log.info(player.getName() + ": ChatCommands: WORLD");
-				Location location = Bukkit.getWorld(args[0]).getSpawnLocation();
-				player.teleport(location);
-				player.sendMessage(ChatColor.YELLOW + "Teleported to world " + args[0]);
+				try{
+					Location location = Bukkit.getWorld(args[0]).getSpawnLocation();
+					player.teleport(location);
+					player.sendMessage(ChatColor.YELLOW + "Teleported to world " + args[0]);
+				}catch(Exception error){
+					player.sendMessage(ChatColor.RED + "The world " + args[0] + " does not exist.");
+				}
 			}else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.world " + ChatColor.RED + "to perform this command.");
 			}

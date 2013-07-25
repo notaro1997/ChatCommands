@@ -34,7 +34,7 @@ public class Quit implements CommandExecutor{
 						i++;
 					}
 					plugin.KickedPlayers.add(player.getName());
-					Bukkit.getServer().broadcastMessage(ChatColor.DARK_GRAY + player.getDisplayName() + " quit - " + ChatColor.YELLOW + MSG); 
+					Bukkit.getServer().broadcastMessage(ChatColor.DARK_GRAY + player.getDisplayName() + ChatColor.DARK_GRAY + " quit - " + ChatColor.YELLOW + MSG); 
 					player.kickPlayer(ChatColor.DARK_AQUA + "Goodbye.");
 				}
 			}else{

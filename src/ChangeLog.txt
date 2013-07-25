@@ -1,8 +1,60 @@
+v10.3
+- commands: 74
+* Added permission messages to certain commands that didnt have one.
+
+V10.2
+- commands: 74
++ Added /spawner command! Point at a mob spawner and control what it spawns.
++ Added /chatcolor command! Change the color of the chat!
+* Fixed time error
+* Changed file name to ServerDataFile.
+* Changed UpdateCheckerFile class to SeverData.
+* Changed ArrayList to serverData.
+* Added sponsors to plugin.yml
+
+v10.1
+- commands: 72
+* Added message to the lore of boomstick.
+* Fixed permission message for /unblock.
+* Removed ReloadListener, now works in Main.
+
+v10.0
+- commands: 72
++ Added /god command! Put any player into god mode! type again to turn off.
++ Added /time server day or night! Now you can set the server time too!
++ Added /tnt command! Spawn a primed tnt where your pointing.
++ Added /freeze command! Freeze a player in their tracks! type again to unfreeze.
++ Added /ride command! Ride any online player! type again to get off.
++ Added /block command! Block any item, or mobs from spawning.
++ Added /unblock command! Unblock anything that was previously blocked.
++ Now when typing /reload, there is a message for reloading ChatCommands.
++ Added /blockhere command! Change the block your pointing at.
+* Fixed spawn glitch! Now after typing /setspawn, /spawn will teleport you 
+to the exact position you were previously in.
+* Changed messages in updateChecker
+* Added message for /time
+* Added message for /weather
+* Changed messages for /spawn, and /warp
+* Changed message for /hat
+
+v9.9
+- commands: 65
++ Added /head command! Create the head of any player in the world!
++ Now when typing /sm or /mob you can name the mob, as well as control the color of the name
+e.g. /mob cow 10 MOOO 5. This would create 10 cows named MOOO in the color Dark Purple.
+* Fixed color in /summon
+* Fixed error when trying to summon/tp to a player that does not exist.
+* The following commands can now be used via the console: say, updatechecker, satan, Mute, kill, 
+kickall, afk, blind, unblind, bitchslap, ban, exp, fakeop, heal, hug, info, join, kick, leave.
+
 v9.8
-- commands: 62
+- commands: 64
++ Added /egg command! When you type /egg, you will receive an egg that spawns all mobs!
++ Added /up command! Teleport up any amount!
 * Now for /sm or /mob you can type the amount of that mob you want to spawn! ex. /mob cow 1000.
 * Added a constructor to every class.
 * It will now log in the console whenever a command is used.
+* Fixed color in /quit
 * Fixed permission bug with /home
 * Boomstick item is now called "Boomstick".
 * Superpick item is now called "Superpick".

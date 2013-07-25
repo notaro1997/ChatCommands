@@ -1,5 +1,8 @@
 package notaro.chatcommands.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import notaro.chatcommands.ChatCommands;
 
 import org.bukkit.ChatColor;
@@ -20,6 +23,7 @@ public class Boomstick implements CommandExecutor{
 		this.plugin = plugin;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player == false){
@@ -36,9 +40,16 @@ public class Boomstick implements CommandExecutor{
 				boomstick.addUnsafeEnchantment(Enchantment.KNOCKBACK, 10);
 				boomstick.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 5);
 				ItemMeta meta = boomstick.getItemMeta();
+				List<String> Lore = new ArrayList<String>();
+				Lore.add(ChatColor.GREEN + "They sent forth men to battle,");
+				Lore.add(ChatColor.GREEN + "But no such men return;");
+				Lore.add(ChatColor.GREEN + "And home, to claim their welcome,");
+				Lore.add(ChatColor.GREEN + "Come ashes in an urn.");
+				meta.setLore(Lore);
 				meta.setDisplayName(ChatColor.AQUA + "Boomstick");
 				boomstick.setItemMeta(meta);
 				inventory.addItem(boomstick);	
+				player.updateInventory();
 			}else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.boomstick " + ChatColor.RED + "to perform this command."); 
 			}

@@ -18,14 +18,9 @@ public class Ban implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
-			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
-			return true;
-		}
-		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("ban")){
-			if(sender.hasPermission("notaro.ban") || player.hasPermission("notaro.*")){
-				plugin.log.info(player.getName() + ": ChatCommands: BAN");
+			if(sender.hasPermission("notaro.ban") || sender.hasPermission("notaro.*")){
+				plugin.log.info(sender.getName() + ": ChatCommands: BAN");
 				if(args.length != 0){
 					int i = 1;
 					int para = args.length;
@@ -38,10 +33,10 @@ public class Ban implements CommandExecutor{
 					plugin.KickedPlayers.add(target.getName());
 					target.setBanned(true);
 					target.kickPlayer(ChatColor.DARK_RED + "BANNED!" + ChatColor.AQUA + " Reason: " + ChatColor.RED + MSG);
-					Bukkit.getServer().broadcastMessage(ChatColor.RED + target.getName() + " has been banned by " + player.getName());
+					Bukkit.getServer().broadcastMessage(ChatColor.RED + target.getName() + " has been banned by " + sender.getName());
 				}
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.ban " + ChatColor.RED + "to perform this command.");
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.ban " + ChatColor.RED + "to perform this command.");
 			}
 		}
 		return false;

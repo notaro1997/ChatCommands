@@ -19,28 +19,28 @@ public class Heal implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
-			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
-			return true;
-		}
-		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("heal") && args.length == 1){
-			if(player.hasPermission("notaro.heal") || player.hasPermission("notaro.*")){
-				plugin.log.info(player.getName() + ": ChatCommands: HEAL");
+			if(sender.hasPermission("notaro.heal") || sender.hasPermission("notaro.*")){
+				plugin.log.info(sender.getName() + ": ChatCommands: HEAL");
 				if(args.length == 1){
 					Player target = Bukkit.getPlayer(args[0]);
 					if(target != null){
 						PotionEffectType effect = (PotionEffectType.HEAL);
 						target.addPotionEffect(effect.createEffect(1500000, 100));
-						player.sendMessage(ChatColor.AQUA + "You have healed: " + target.getDisplayName());
-						target.sendMessage(ChatColor.AQUA + "You were healed by: " + player.getDisplayName());
+						sender.sendMessage(ChatColor.AQUA + "You have healed: " + target.getDisplayName());
+						if(!(sender instanceof Player)){
+						target.sendMessage(ChatColor.AQUA + "You were healed by: " + sender.getName());
+						}else{
+							Player player = (Player) sender;
+							target.sendMessage(ChatColor.AQUA + "You were healed by: " + player.getDisplayName());
+						}
 					}
 				}    
 			} else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.heal " + ChatColor.RED + "to perform this command.");
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.heal " + ChatColor.RED + "to perform this command.");
 			}  
 		}else{
-			player.sendMessage(ChatColor.RED + "Please specify who to heal.");
+			sender.sendMessage(ChatColor.RED + "Please specify who to heal.");
 		}
 		return false;
 	}

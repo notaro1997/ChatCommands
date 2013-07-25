@@ -14,6 +14,7 @@ public class UpdateChecker {
 	private URL filesFeed;
 	private String version;
 	private String link;
+	
 	public UpdateChecker(ChatCommands plugin, String url){
 		this.plugin = plugin;
 

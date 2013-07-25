@@ -74,6 +74,8 @@ public class Item implements CommandExecutor{
 						}
 					}
 				}
+			}else{
+				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.item " + ChatColor.RED + "to perform this command.");
 			}
 		}
 		return false;

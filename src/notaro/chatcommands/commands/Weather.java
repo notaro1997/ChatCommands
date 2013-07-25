@@ -28,12 +28,15 @@ public class Weather implements CommandExecutor{
 				if(args[0].equalsIgnoreCase("sun")){
 					player.getWorld().setStorm(false);
 					player.getWorld().setThundering(false);
+					player.sendMessage(ChatColor.BLUE + "Setting server weather to " + ChatColor.YELLOW + "Sun");
 				}
 				if(args[0].equalsIgnoreCase("rain")){
 					player.getWorld().setStorm(true);	
+					player.sendMessage(ChatColor.BLUE + "Setting server weather to " + ChatColor.YELLOW + "Rain");
 				}
 				if(args[0].equalsIgnoreCase("storm")){
 					player.getWorld().setThundering(true);
+					player.sendMessage(ChatColor.BLUE + "Setting server weather to " + ChatColor.YELLOW + "Storm");
 				}
 			}
 		}else{

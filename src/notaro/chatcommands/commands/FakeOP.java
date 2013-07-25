@@ -18,21 +18,16 @@ public class FakeOp implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
-			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
-			return true;
-		}
-		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("fakeop")){
-			if(player.hasPermission("notaro.fakeop") || player.hasPermission("notaro.*")){
-				plugin.log.info(player.getName() + ": ChatCommands: FAKEOP");
+			if(sender.hasPermission("notaro.fakeop") || sender.hasPermission("notaro.*")){
+				plugin.log.info(sender.getName() + ": ChatCommands: FAKEOP");
 				if(args.length == 1){
 					Player target = Bukkit.getPlayer(args[0]);
 					target.sendMessage(ChatColor.YELLOW + "You are now op!");
-					player.sendMessage(ChatColor.YELLOW + target.getDisplayName() + ChatColor.YELLOW + " most likely thinks they're op now.");
+					sender.sendMessage(ChatColor.YELLOW + target.getDisplayName() + ChatColor.YELLOW + " most likely thinks they're op now.");
 				}
 			} else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.fakeop " + ChatColor.RED + "to perform this command."); 	
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.fakeop " + ChatColor.RED + "to perform this command."); 	
 			}
 		}
 		return false;

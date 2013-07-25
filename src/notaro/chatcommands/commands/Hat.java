@@ -31,12 +31,12 @@ public class Hat implements CommandExecutor{
 				PlayerInventory inv = player.getInventory();
 				ItemStack hat = inv.getHelmet();
 				if(inv == null || player.getItemInHand().getType() == Material.AIR){
-					player.sendMessage(ChatColor.RED + "No items to make your hat.");
+					player.sendMessage(ChatColor.RED + "You have no items in hand.");
 				}
 				if(player.getItemInHand().getType() != Material.AIR){
 					ItemStack item = player.getItemInHand().clone();
 					if(item.getType().getMaxDurability() == 0){
-						player.sendMessage(ChatColor.GOLD + "I like your " + ChatColor.YELLOW + player.getItemInHand().getType().toString().toLowerCase() + ChatColor.GOLD + " hat.");
+						player.sendMessage(ChatColor.GOLD + "I like your " + ChatColor.YELLOW + player.getItemInHand().getType().toString().toLowerCase().replace("_", " ") + ChatColor.GOLD + " hat.");
 						item.setAmount(1);
 						inv.remove(item);
 						inv.setHelmet(item);

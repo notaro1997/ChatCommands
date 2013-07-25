@@ -18,35 +18,30 @@ public class Mute implements CommandExecutor{
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player == false){
-			sender.sendMessage(ChatColor.RED + "This command can only be used in the chat!");
-			return true;
-		} 
-		Player player = (Player) sender;
 		MuteFile MuteFile = plugin.MutedPlayers;
 		if(cmd.getName().equalsIgnoreCase("mute") && args.length == 1){
-			if(player.hasPermission("notaro.mute") || player.hasPermission("notaro.*")){
-				plugin.log.info(player.getName() + ": ChatCommands: MUTE");
+			if(sender.hasPermission("notaro.mute") || sender.hasPermission("notaro.*")){
+				plugin.log.info(sender.getName() + ": ChatCommands: MUTE");
 				Player target = Bukkit.getPlayer(args[0]);
 				String name = target.getName();
 				MuteFile.add(name);
 				MuteFile.saveData();
-				player.sendMessage(ChatColor.DARK_GRAY + target.getName() + ChatColor.GRAY + " is now muted.");
+				sender.sendMessage(ChatColor.DARK_GRAY + target.getName() + ChatColor.GRAY + " is now muted.");
 				target.sendMessage(ChatColor.RED + "You are now muted! Anything you say will not be seen.");
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.mute " + ChatColor.RED + "to perform this command.");
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.mute " + ChatColor.RED + "to perform this command.");
 			}
 		} else if(cmd.getName().equalsIgnoreCase("unmute")){
-			if(player.hasPermission("notaro.unmute")){
-				plugin.log.info(player.getName() + ": ChatCommands: UNMUTE");
+			if(sender.hasPermission("notaro.unmute")){
+				plugin.log.info(sender.getName() + ": ChatCommands: UNMUTE");
 				Player target = Bukkit.getPlayer(args[0]);
 				String name = target.getName();
 				MuteFile.remove(name);
 				MuteFile.saveData();
-				player.sendMessage(ChatColor.DARK_GRAY + target.getName() + ChatColor.GRAY + " is no longer muted.");
+				sender.sendMessage(ChatColor.DARK_GRAY + target.getName() + ChatColor.GRAY + " is no longer muted.");
 				target.sendMessage(ChatColor.RED + "You are no longer muted.");
 			}else{
-				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.unmute " + ChatColor.RED + "to perform this command.");
+				sender.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.unmute " + ChatColor.RED + "to perform this command.");
 			}
 		}
 		return false;

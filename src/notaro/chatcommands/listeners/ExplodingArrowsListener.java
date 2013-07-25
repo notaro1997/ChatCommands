@@ -26,7 +26,7 @@ public class ExplodingArrowsListener implements Listener{
 			if (shooter instanceof Player) {
 				Player player = (Player) shooter;
 				if (player.hasPermission("notaro.ea") || player.hasPermission("notaro.*")){
-					if (plugin.enabledPlayers.contains(player.getName())){
+					if (plugin.explodingArrowsPlayers.contains(player.getName())){
 						player.getWorld().createExplosion(arrow.getLocation(), 6F);
 					}
 				}

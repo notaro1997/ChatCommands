@@ -39,7 +39,7 @@ public class Warp implements CommandExecutor{
 						float yaw = warps.getWarps().getInt(warp + ".yaw");
 						float pitch = warps.getWarps().getInt(warp + ".pitch");
 						Location location = new Location(Bukkit.getWorld(world), x + 0.5, y, z + 0.5, yaw, pitch);
-						player.sendMessage(ChatColor.DARK_AQUA + "You successfully warped to " + ChatColor.YELLOW + warp);
+						player.sendMessage(ChatColor.DARK_AQUA + "Warped to " + ChatColor.YELLOW + warp);
 						player.teleport(location);
 						return true;
 					}else{

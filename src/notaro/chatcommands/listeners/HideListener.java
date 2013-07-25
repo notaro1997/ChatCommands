@@ -20,16 +20,16 @@ public class HideListener implements Listener{
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerJoin(PlayerJoinEvent event){
 		HideFile HideFile = plugin.HiddenPlayers;
-		Player player = event.getPlayer();
-		String name = player.getName();
-		if(HideFile.contains(name)){
-			player.sendMessage(ChatColor.RED + "(You are hidden)");
+		if(HideFile.contains(event.getPlayer().getName())){
+			event.getPlayer().sendMessage(ChatColor.RED + "(You are hidden)");
 			for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()){
-				if (!onlinePlayer.equals(player)){
-					onlinePlayer.hidePlayer(player);
+				if (!onlinePlayer.equals(event.getPlayer())){
+					onlinePlayer.hidePlayer(event.getPlayer());
 					event.setJoinMessage(null);
-				}
+				}	
 			}
 		}
 	}
 }
+
+

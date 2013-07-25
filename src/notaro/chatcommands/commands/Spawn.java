@@ -26,16 +26,15 @@ public class Spawn implements CommandExecutor{
 		if (cmd.getName().equalsIgnoreCase("setspawn")) {
 			if (player.hasPermission("notaro.setspawn") || player.hasPermission("notaro.*")){
 				plugin.log.info(player.getName() + ": ChatCommands: SETSPAWN");
-				player.sendMessage(ChatColor.DARK_AQUA + "You have succesfully set a new spawn point for world: " + ChatColor.RED + world);
+				player.sendMessage(ChatColor.DARK_AQUA + "Spawn set for " + ChatColor.RED + world);
 				Location spawn = player.getLocation();
 				int x = spawn.getBlockX();
 				int y = spawn.getBlockY();
 				int z = spawn.getBlockZ();
-				@SuppressWarnings("unused")
-				float yaw = spawn.getYaw();
-				@SuppressWarnings("unused")
-				float pitch = spawn.getPitch();
+				plugin.getConfig().set("spawn.location.pitch", spawn.getPitch());
+				plugin.getConfig().set("spawn.location.yaw", spawn.getYaw());
 				player.getWorld().setSpawnLocation(x, y, z);
+				
 			} else{
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.setspawn " + ChatColor.RED + "to perform this command.");
 			}
@@ -43,13 +42,13 @@ public class Spawn implements CommandExecutor{
 		} else if (cmd.getName().equalsIgnoreCase("spawn")) {
 			if (player.hasPermission("notaro.spawn") || player.hasPermission("notaro.*")){
 				plugin.log.info(player.getName() + ": ChatCommands: SPAWN");
-				player.sendMessage(ChatColor.YELLOW + "You succesfully teleported to spawn in world: " + ChatColor.RED + world);
+				player.sendMessage(ChatColor.YELLOW + "Teleported to spawn in " + ChatColor.RED + world);
 				Location spawn = player.getWorld().getSpawnLocation();
 				spawn.setX(spawn.getBlockX() + 0.5);
 				spawn.setY(spawn.getBlockY());
 				spawn.setZ(spawn.getBlockZ() + 0.5);
-				spawn.setYaw(spawn.getYaw());
-				spawn.setPitch(spawn.getPitch());
+				spawn.setYaw(plugin.getConfig().getInt("spawn.location.yaw"));
+				spawn.setPitch(plugin.getConfig().getInt("spawn.location.pitch"));
 				player.teleport(spawn);	
 			} else{	
 				player.sendMessage(ChatColor.RED + "You need the permission: " + ChatColor.DARK_GREEN + "notaro.spawn " + ChatColor.RED + "to perform this command.");	
